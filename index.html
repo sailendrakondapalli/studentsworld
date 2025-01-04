@@ -1,0 +1,4685 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js"></script>
+  <title>STUDENTS WORLD</title>
+  
+  <style>
+
+     #chat{
+      
+            margin-top: 50px;
+            height: calc(100vh - 50px);
+            overflow-y: scroll;
+            padding: 20px;
+        
+    }
+
+   #body {
+            margin: 0;
+            padding: 0;
+        }
+        #ip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+           
+            padding: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+
+
+
+
+ .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .message {
+            margin: 10px;
+            padding: 5px 10px;
+            border-radius: 8px;
+        }
+
+        .sent {
+            background-color: #DCF8C6; /* Color for sent messages */
+            align-self: flex-end;
+        }
+
+        .received {
+            background-color: #EAEAEA; /* Color for received messages */
+            align-self: flex-start;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#search {
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+#search:focus {
+  width: 75%;
+}
+
+
+
+
+    /* Your existing styles here */
+
+    /* Style for the hidden content */
+    #hiddenContent {
+      display: none;
+      margin-top: 20px;
+      padding: 10px;
+      
+      font-family: Arial, sans-serif;
+    }
+
+html {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
+
+/*
+ * Animated CSS button
+ * Copyright Alexander Bodin 2019-09-07
+ *
+ * Useage: .class {@import button($button-size, $hue, $sat);}
+ */
+button {
+  background: linear-gradient(-30deg, #0b1b3d 50%, #08142b 50%);
+ 
+  margin: 50px 50px 50px 50px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4e0f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #8592ad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button:hover::before {
+  opacity: 0.2;
+}
+
+.button span {
+  position: absolute;
+}
+
+.button span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 20, 43, 0)), to(#2662d9));
+  background: linear-gradient(to left, rgba(8, 20, 43, 0), #2662d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@-webkit-keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 20, 43, 0)), to(#2662d9));
+  background: linear-gradient(to top, rgba(8, 20, 43, 0), #2662d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@-webkit-keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 20, 43, 0)), to(#2662d9));
+  background: linear-gradient(to right, rgba(8, 20, 43, 0), #2662d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@-webkit-keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 20, 43, 0)), to(#2662d9));
+  background: linear-gradient(to bottom, rgba(8, 20, 43, 0), #2662d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@-webkit-keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+button {
+  background: linear-gradient(-30deg, #3d0b0b 50%, #2b0808 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #f7d4d4;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ad8585;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+button:hover::before {
+  opacity: 0.2;
+}
+
+button span {
+  position: absolute;
+}
+
+button span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 8, 0)), to(#d92626));
+  background: linear-gradient(to left, rgba(43, 8, 8, 0), #d92626);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+#chat-history { background-color: whitesmoke;
+        border: 1px solid #ccc;
+        padding: 10px;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+button span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 8, 8, 0)), to(#d92626));
+  background: linear-gradient(to top, rgba(43, 8, 8, 0), #d92626);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 8, 0)), to(#d92626));
+  background: linear-gradient(to right, rgba(43, 8, 8, 0), #d92626);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 8, 8, 0)), to(#d92626));
+  background: linear-gradient(to bottom, rgba(43, 8, 8, 0), #d92626);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button2 {
+  background: linear-gradient(-30deg, #3d240b 50%, #2b1a08 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #f7e6d4;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button2::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ad9985;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button2:hover::before {
+  opacity: 0.2;
+}
+
+.button2 span {
+  position: absolute;
+}
+
+.button2 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(43, 26, 8, 0)), to(#d98026));
+  background: linear-gradient(to left, rgba(43, 26, 8, 0), #d98026);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button2 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 26, 8, 0)), to(#d98026));
+  background: linear-gradient(to top, rgba(43, 26, 8, 0), #d98026);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button2 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(43, 26, 8, 0)), to(#d98026));
+  background: linear-gradient(to right, rgba(43, 26, 8, 0), #d98026);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button2 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 26, 8, 0)), to(#d98026));
+  background: linear-gradient(to bottom, rgba(43, 26, 8, 0), #d98026);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button3 {
+  background: linear-gradient(-30deg, #3d3d0b 50%, #2b2b08 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #f7f7d4;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button3::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #adad85;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button3:hover::before {
+  opacity: 0.2;
+}
+
+.button3 span {
+  position: absolute;
+}
+
+.button3 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(43, 43, 8, 0)), to(#d9d926));
+  background: linear-gradient(to left, rgba(43, 43, 8, 0), #d9d926);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button3 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 43, 8, 0)), to(#d9d926));
+  background: linear-gradient(to top, rgba(43, 43, 8, 0), #d9d926);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button3 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(43, 43, 8, 0)), to(#d9d926));
+  background: linear-gradient(to right, rgba(43, 43, 8, 0), #d9d926);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button3 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 43, 8, 0)), to(#d9d926));
+  background: linear-gradient(to bottom, rgba(43, 43, 8, 0), #d9d926);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button4 {
+  background: linear-gradient(-30deg, #243d0b 50%, #1a2b08 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #e6f7d4;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button4::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #99ad85;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button4:hover::before {
+  opacity: 0.2;
+}
+
+.button4 span {
+  position: absolute;
+}
+
+.button4 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(26, 43, 8, 0)), to(#80d926));
+  background: linear-gradient(to left, rgba(26, 43, 8, 0), #80d926);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button4 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(26, 43, 8, 0)), to(#80d926));
+  background: linear-gradient(to top, rgba(26, 43, 8, 0), #80d926);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button4 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(26, 43, 8, 0)), to(#80d926));
+  background: linear-gradient(to right, rgba(26, 43, 8, 0), #80d926);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button4 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(26, 43, 8, 0)), to(#80d926));
+  background: linear-gradient(to bottom, rgba(26, 43, 8, 0), #80d926);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button5 {
+  background: linear-gradient(-30deg, #0b3d0b 50%, #082b08 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4f7d4;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button5::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #85ad85;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button5:hover::before {
+  opacity: 0.2;
+}
+
+.button5 span {
+  position: absolute;
+}
+
+.button5 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 43, 8, 0)), to(#26d926));
+  background: linear-gradient(to left, rgba(8, 43, 8, 0), #26d926);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button5 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 43, 8, 0)), to(#26d926));
+  background: linear-gradient(to top, rgba(8, 43, 8, 0), #26d926);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button5 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 43, 8, 0)), to(#26d926));
+  background: linear-gradient(to right, rgba(8, 43, 8, 0), #26d926);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button5 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 43, 8, 0)), to(#26d926));
+  background: linear-gradient(to bottom, rgba(8, 43, 8, 0), #26d926);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button6 {
+  background: linear-gradient(-30deg, #0b3d24 50%, #082b1a 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4f7e6;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button6::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #85ad99;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button6:hover::before {
+  opacity: 0.2;
+}
+
+.button6 span {
+  position: absolute;
+}
+
+.button6 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 43, 26, 0)), to(#26d980));
+  background: linear-gradient(to left, rgba(8, 43, 26, 0), #26d980);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button6 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 43, 26, 0)), to(#26d980));
+  background: linear-gradient(to top, rgba(8, 43, 26, 0), #26d980);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button6 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 43, 26, 0)), to(#26d980));
+  background: linear-gradient(to right, rgba(8, 43, 26, 0), #26d980);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button6 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 43, 26, 0)), to(#26d980));
+  background: linear-gradient(to bottom, rgba(8, 43, 26, 0), #26d980);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button7 {
+  background: linear-gradient(-30deg, #0b3d3d 50%, #082b2b 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4f7f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button7::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #85adad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button7:hover::before {
+  opacity: 0.2;
+}
+
+.button7 span {
+  position: absolute;
+}
+
+.button7 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 43, 43, 0)), to(#26d9d9));
+  background: linear-gradient(to left, rgba(8, 43, 43, 0), #26d9d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button7 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 43, 43, 0)), to(#26d9d9));
+  background: linear-gradient(to top, rgba(8, 43, 43, 0), #26d9d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button7 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 43, 43, 0)), to(#26d9d9));
+  background: linear-gradient(to right, rgba(8, 43, 43, 0), #26d9d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button7 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 43, 43, 0)), to(#26d9d9));
+  background: linear-gradient(to bottom, rgba(8, 43, 43, 0), #26d9d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button8 {
+  background: linear-gradient(-30deg, #0b243d 50%, #081a2b 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4e6f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button8::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #8599ad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button8:hover::before {
+  opacity: 0.2;
+}
+
+.button8 span {
+  position: absolute;
+}
+
+.button8 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 26, 43, 0)), to(#2680d9));
+  background: linear-gradient(to left, rgba(8, 26, 43, 0), #2680d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button8 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 26, 43, 0)), to(#2680d9));
+  background: linear-gradient(to top, rgba(8, 26, 43, 0), #2680d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button8 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 26, 43, 0)), to(#2680d9));
+  background: linear-gradient(to right, rgba(8, 26, 43, 0), #2680d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button8 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 26, 43, 0)), to(#2680d9));
+  background: linear-gradient(to bottom, rgba(8, 26, 43, 0), #2680d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button9 {
+  background: linear-gradient(-30deg, #0b0b3d 50%, #08082b 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #d4d4f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button9::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #8585ad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button9:hover::before {
+  opacity: 0.2;
+}
+
+.button9 span {
+  position: absolute;
+}
+
+.button9 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(8, 8, 43, 0)), to(#2626d9));
+  background: linear-gradient(to left, rgba(8, 8, 43, 0), #2626d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button9 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(8, 8, 43, 0)), to(#2626d9));
+  background: linear-gradient(to top, rgba(8, 8, 43, 0), #2626d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button9 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(8, 8, 43, 0)), to(#2626d9));
+  background: linear-gradient(to right, rgba(8, 8, 43, 0), #2626d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button9 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(8, 8, 43, 0)), to(#2626d9));
+  background: linear-gradient(to bottom, rgba(8, 8, 43, 0), #2626d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button10 {
+  background: linear-gradient(-30deg, #240b3d 50%, #1a082b 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #e6d4f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button10::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #9985ad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button10:hover::before {
+  opacity: 0.2;
+}
+
+.button10 span {
+  position: absolute;
+}
+
+.button10 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(26, 8, 43, 0)), to(#8026d9));
+  background: linear-gradient(to left, rgba(26, 8, 43, 0), #8026d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button10 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(26, 8, 43, 0)), to(#8026d9));
+  background: linear-gradient(to top, rgba(26, 8, 43, 0), #8026d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button10 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(26, 8, 43, 0)), to(#8026d9));
+  background: linear-gradient(to right, rgba(26, 8, 43, 0), #8026d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button10 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(26, 8, 43, 0)), to(#8026d9));
+  background: linear-gradient(to bottom, rgba(26, 8, 43, 0), #8026d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button11 {
+  background: linear-gradient(-30deg, #3d0b3d 50%, #2b082b 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #f7d4f7;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button11::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ad85ad;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button11:hover::before {
+  opacity: 0.2;
+}
+
+.button11 span {
+  position: absolute;
+}
+
+.button11 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 43, 0)), to(#d926d9));
+  background: linear-gradient(to left, rgba(43, 8, 43, 0), #d926d9);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button11 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 8, 43, 0)), to(#d926d9));
+  background: linear-gradient(to top, rgba(43, 8, 43, 0), #d926d9);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button11 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 43, 0)), to(#d926d9));
+  background: linear-gradient(to right, rgba(43, 8, 43, 0), #d926d9);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button11 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 8, 43, 0)), to(#d926d9));
+  background: linear-gradient(to bottom, rgba(43, 8, 43, 0), #d926d9);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+.button12 {
+  background: linear-gradient(-30deg, #3d0b24 50%, #2b081a 50%);
+  padding: 20px 40px;
+  margin: 12px;
+  display: inline-block;
+  -webkit-transform: translate(0%, 0%);
+          transform: translate(0%, 0%);
+  overflow: hidden;
+  color: #f7d4e6;
+  font-size: 20px;
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.button12::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: #ad8599;
+  opacity: 0;
+  -webkit-transition: .2s opacity ease-in-out;
+  transition: .2s opacity ease-in-out;
+}
+
+.button12:hover::before {
+  opacity: 0.2;
+}
+
+.button12 span {
+  position: absolute;
+}
+
+.button12 span:nth-child(1) {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, right top, left top, from(rgba(43, 8, 26, 0)), to(#d92680));
+  background: linear-gradient(to left, rgba(43, 8, 26, 0), #d92680);
+  -webkit-animation: 2s animateTop linear infinite;
+          animation: 2s animateTop linear infinite;
+}
+
+@keyframes animateTop {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+.button12 span:nth-child(2) {
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left bottom, left top, from(rgba(43, 8, 26, 0)), to(#d92680));
+  background: linear-gradient(to top, rgba(43, 8, 26, 0), #d92680);
+  -webkit-animation: 2s animateRight linear -1s infinite;
+          animation: 2s animateRight linear -1s infinite;
+}
+
+@keyframes animateRight {
+  0% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+  100% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+}
+
+.button12 span:nth-child(3) {
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 2px;
+  background: -webkit-gradient(linear, left top, right top, from(rgba(43, 8, 26, 0)), to(#d92680));
+  background: linear-gradient(to right, rgba(43, 8, 26, 0), #d92680);
+  -webkit-animation: 2s animateBottom linear infinite;
+          animation: 2s animateBottom linear infinite;
+}
+
+@keyframes animateBottom {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+  }
+}
+
+.button12 span:nth-child(4) {
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(43, 8, 26, 0)), to(#d92680));
+  background: linear-gradient(to bottom, rgba(43, 8, 26, 0), #d92680);
+  -webkit-animation: 2s animateLeft linear -1s infinite;
+          animation: 2s animateLeft linear -1s infinite;
+}
+
+@keyframes animateLeft {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+  }
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+            header {
+                font-size: 24px;
+            }
+            
+            main {
+                font-size: 18px;
+            }
+        }
+
+
+
+  </style>
+</head>
+
+<body style="background-color:powderblue ">
+  
+  <button id="bodyclick" style="margin: 0 auto; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; height: 100%;" ><img src="https://www.linkpicture.com/q/5_235.jpg" alt="Snow" style="width:100%; height: auto"  ><span></span><span></span><span></span><span></span>Tap Any Where On Screen<span></span><span></span><span></span><span></span></button> 
+
+  <div id="bodynone" style="display: none;">
+
+
+
+  <h1 style="text-align:center"  >WELCOME TO STUDENTS WORLD</h1>
+  <p style="text-align:center"  >DEVELOPED BY SAILENDRA</p>
+  <hr style="color:yellow; margin: 20px;">
+
+  <div id="messages"></div>
+
+  
+ 
+  
+  <!-- Show Content button -->
+  <div id="showButton" >
+    <h3 style="text-align:center" > Diploma</h3>
+    <button><span></span><span></span><span></span><span></span>Diploma<span></span><span></span><span></span><span></span></button>
+</div>
+
+
+  
+  <!-- Hidden Content -->
+  <div id="hiddenContent">
+    <h3 style="text-align:center" >Groups In Diploma.....!</h3>
+ <button id="cmeButton" >CME<span></span><span></span><span></span><span></span></buton>
+    <button id="aiButton">AI<span></span><span></span><span></span><span></span></buton>
+    <button id="mechButton">MECH<span></span><span></span><span></span><span></span></buton>
+    <button id="civilButton">CIVIL<span></span><span></span><span></span><span></span></buton>
+    <button id="back">Back<span></span><span></span><span></span><span></span></buton>
+  </div>
+    <!-- Additional Buttons Structure -->
+    <div id="additionalButtons" >
+      <!-- CME Buttons -->
+      <div id="hi" style="display: none;">
+        <h3>Semesters In CME</h3>
+        <button id="1stsem" data-level="1">1st & 2nd Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="3rdsem" data-level="2">3rd Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="4rthsem" data-level="3">4rth Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="5thsem" data-level="4">5th Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="cme" data-level="5">6th Semester(Training)<span></span><span></span><span></span><span></span></buton>
+        <button id="backcme">Back<span></span><span></span><span></span><span></span></buton>
+      </div>
+
+      
+      <!-- AI Buttons -->
+      <div id="hii" style="display: none;">
+        Semesters In AI
+        <button id="1stsemai" data-level="1">1st & 2nd Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="3rdsemai" data-level="2">3rd Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="4rthsemai" data-level="3">4rth Semester<span></span><span></span><span></span><span></span></buton>
+        <button id="5thsemai" data-level="4">5th Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="ai" data-level="5">6th Semester(Training)<span></span><span></span><span></span><span></span></buton>
+        <button id="backai">Back<span></span><span></span><span></span><span></span></buton>
+      </div>
+      
+      <!-- MECH Buttons -->
+      <div id="hiii" style="display: none;">
+        Semesters In MECH
+        <button class="mech" data-level="1">1st & 2nd Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="mech" data-level="2">3rd Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="mech" data-level="3">4rth Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="mech" data-level="4">5th Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="mech" data-level="5">6th Semester(Training)<span></span><span></span><span></span><span></span></buton>
+        <button id="backmech">Back<span></span><span></span><span></span><span></span></buton>
+      </div>
+      
+      <!-- CIVIL Buttons -->
+      <div id="hiiii" style="display: none;">
+        Semesters In CIVIL
+        <button class="civil" data-level="1">1st & 2nd Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="civil" data-level="2">3rd Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="civil" data-level="3">4rth Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="civil" data-level="4">5th Semester<span></span><span></span><span></span><span></span></buton>
+        <button class="civil" data-level="5">6th Semester(Training)<span></span><span></span><span></span><span></span></buton>
+        <button id="backcivil">Back<span></span><span></span><span></span><span></span></buton>
+      </div>
+    </div>
+
+    <div id="me" style="display:none;">
+      THEORY SUBJECTS
+    <button id="eng">English(101)                                                 <span></span><span></span><span></span><span></span></buton>
+    <button id="m1">Enginering Mathematics-1(102)                                 <span></span><span></span><span></span><span></span></buton>
+    <button id="phy">Enginering Physics(103)                                      <span></span><span></span><span></span><span></span></buton>
+    <button id="chem">Enginering Chemistry & Environmental Studies(104)           <span></span><span></span><span></span><span></span></buton>
+    <button id="bce">Basics Of Computer Engineering(105)                          <span></span><span></span><span></span><span></span></buton>
+    <button id="c">Programming In C(106)                                          <span></span><span></span><span></span><span></span></buton>
+       PRACTICAL SUBJECTS
+    <button>Engineering Drawing(107)                                              <span></span><span></span><span></span><span></span></buton>
+    <button id="back1stsemcme">Back                                               <span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="mee" style="display:none;">
+      THEORY SUBJECTS
+    <button id="m2">Enginering Mathematics-2(301)<span></span><span></span><span></span><span></span></buton>
+    <button id="de">Digital Electronics(302)<span></span><span></span><span></span><span></span></buton>
+        <button id="os">Operating System(303)<span></span><span></span><span></span><span></span></buton>
+        <button id="ds">Data Structures Through-C(304)<span></span><span></span><span></span><span></span></buton>
+        <button id="dbms">Data Base Management System(305)<span></span><span></span><span></span><span></span></buton>
+        <button id="back3rdsemcme">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="meee" style="display:none;">
+      THEORY SUBJECTS
+    <button id="m3">Enginering Mathematics-3(401)<span></span><span></span><span></span><span></span></buton>
+    <button id="wt">Web Technologies(402)<span></span><span></span><span></span><span></span></buton>
+        <button id="comp">Computer Organization & MicroProcessors(403)<span></span><span></span><span></span><span></span></buton>
+        <button id="ok">OOPS Through C++(404)<span></span><span></span><span></span><span></span></buton>
+        <button id="cn">Computer Networks(405)<span></span><span></span><span></span><span></span></buton>
+        <button id="back4rthsemcme">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="meeee" style="display:none;">
+      THEORY SUBJECTS
+    <button id="ime">Industrial Management & Entrepreneurship(501)<span></span><span></span><span></span><span></span></buton>
+    <button id="jp">Java Programming(502)<span></span><span></span><span></span><span></span></buton>
+        <button id="se">Software Engineering(503)<span></span><span></span><span></span><span></span></buton>
+        <button id="iot">Internet Of Things(504)<span></span><span></span><span></span><span></span></buton>
+        <button id="pp">Python Programming(505)<span></span><span></span><span></span><span></span></buton>
+        <button id="back5thsemcme">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="unit" style="display:none;">
+      <button id="u1" onclick="joinRoom('room1')">Unit-1-English For Employability  <span></span><span></span><span></span><span></span></buton>
+      <button id="u2"  onclick="joinRoom('room2')">Unit-2-Living In Harmony         <span></span><span></span><span></span><span></span></buton>
+      <button id="u3" onclick="joinRoom('room3')" >Unit-3-Connect With Care         <span></span><span></span><span></span><span></span></buton>
+      <button id="u4" onclick="joinRoom('room4')">Unit-4-Humour For Happiness       <span></span><span></span><span></span><span></span></buton>
+      <button id="u5" onclick="joinRoom('room5')" >Unit-5-Never Ever Give Up!       <span></span><span></span><span></span><span></span></buton>
+      <button id="u6" onclick="joinRoom('room6')">Unit-6-Preserve Or Perish         <span></span><span></span><span></span><span></span></buton>
+      <button id="u7" onclick="joinRoom('room7')">Unit-7-The Rainbow Of Diversity   <span></span><span></span><span></span><span></span></buton>
+      <button id="u8" onclick="joinRoom('room8')">Unit-8-New Challenges-Newer Ideas <span></span><span></span><span></span><span></span></buton>
+      <button id="u9" onclick="joinRoom('room9')">Unit-9-The End Point First!       <span></span><span></span><span></span><span></span></buton>
+      <button id="u10" onclick="joinRoom('room10')">Unit-10-The Equal Halves        <span></span><span></span><span></span><span></span></buton>
+      <button id="u11" onclick="joinRoom('room11')">Unit-11-Dealing With Disaster   <span></span><span></span><span></span><span></span></buton>
+      <button id="cmeengback">Back<span></span><span></span><span></span><span></span></buton>
+      
+      </div>   
+
+
+      <div id="unitm1" style="display:none;">
+        <h4>Unit-1</h4> 
+        <button id="u12" onclick="joinRoom('room12')">Lesson-1-Relations & Functions<span></span><span></span><span></span><span></span></buton>
+        <button id="u13" onclick="joinRoom('room13')">Lesson-2-Partial Fractions<span></span><span></span><span></span><span></span></buton>
+        <button id="u14" onclick="joinRoom('room14')">Lesson-3-Matrices & Determinants<span></span><span></span><span></span><span></span></buton>
+        <h4>Unit-2</h4>
+        <button id="u15" onclick="joinRoom('room15')">Lesson-4-Trigonometric Ratios<span></span><span></span><span></span><span></span></buton>
+        <button id="u16" onclick="joinRoom('room16')">Lesson-5-Compound Angles<span></span><span></span><span></span><span></span></buton>
+        <button id="u17" onclick="joinRoom('room17')" >Lesson-6-Multiple & Submultiples Angles<span></span><span></span><span></span><span></span></buton>
+        <button id="u18" onclick="joinRoom('room18')" >Lesson-7-Transformations<span></span><span></span><span></span><span></span></buton>
+        <button id="u19" onclick="joinRoom('room19')">Lesson-8-Inverse Trigonometric Functions<span></span><span></span><span></span><span></span></buton>
+        <button id="u20" onclick="joinRoom('room20')">Lesson-9-Trigonometric Equations<span></span><span></span><span></span><span></span></buton>
+        <button id="u21" onclick="joinRoom('room21')" >Lesson-10-Properties Of Triangles<span></span><span></span><span></span><span></span></buton>
+        <button id="u22" onclick="joinRoom('room22')" >Lesson-11-Hyperbolic Functios<span></span><span></span><span></span><span></span></buton>
+        <button id="u23" onclick="joinRoom('room23')" >Lesson-12-Complex Numbers<span></span><span></span><span></span><span></span></buton>
+        <h4>Unit-3</h4>
+        <button id="u24" onclick="joinRoom('room24')">Lesson-13-Stright Lines<span></span><span></span><span></span><span></span></buton>
+        <button id="u25" onclick="joinRoom('room25')">Lesson-14-Circles<span></span><span></span><span></span><span></span></buton>
+        <button id="u26" onclick="joinRoom('room26')">Lesson-15-Conicsections<span></span><span></span><span></span><span></span></buton>
+        <h4>Unit-4</h4>
+        <button id="u27" onclick="joinRoom('room27')">Lesson-16-Limits & Continuity<span></span><span></span><span></span><span></span></buton>
+        <button id="u28" onclick="joinRoom('room28')">Lesson-17-Differentiation<span></span><span></span><span></span><span></span></buton>
+        <h4>Unit-5</h4>
+        <button id="u29" onclick="joinRoom('room29')">Lesson-18-Geometrical Applications<span></span><span></span><span></span><span></span></buton>
+        <button id="u30" onclick="joinRoom('room30')">Lesson-19-Physical Applications<span></span><span></span><span></span><span></span></buton>
+        <button id="u31" onclick="joinRoom('room31')">Lesson-20-Maxima & Minima<span></span><span></span><span></span><span></span></buton>
+        <button id="u32" onclick="joinRoom('room32')">Lesson-21-Errors & Approximations<span></span><span></span><span></span><span></span></buton>
+        <button id="unitm1back">Back<span></span><span></span><span></span><span></span></buton>
+        </div>   
+
+
+
+        <div id="unitphy" style="display:none;">
+          <button id="u33" onclick="joinRoom('room33')">Unit-1-Units & Dimensions<span></span><span></span><span></span><span></span></buton>
+          <button id="u34" onclick="joinRoom('room34')">Unit-2-Elements Of Vectors<span></span><span></span><span></span><span></span></buton>
+        
+          <button id="u35" onclick="joinRoom('room35')">Unit-3-Dynamics<span></span><span></span><span></span><span></span></buton>
+          <button id="u36" onclick="joinRoom('room36')">Unit-4-Frictions<span></span><span></span><span></span><span></span></buton>
+          <button id="u37" onclick="joinRoom('room37')">Unit-5-Work,Power&Energy<span></span><span></span><span></span><span></span></buton>
+          <button id="u38" onclick="joinRoom('room38')">Unit-6-Simple Harmonic Motion<span></span><span></span><span></span><span></span></buton>
+          <button id="u39" onclick="joinRoom('room39')">Unit-7-Heat & ThermoDynamics<span></span><span></span><span></span><span></span></buton>
+          <button id="u40" onclick="joinRoom('room40')">Unit-8-Sound<span></span><span></span><span></span><span></span></buton>
+          <button id="u41" onclick="joinRoom('room41')">Unit-9-Properties Of Matter<span></span><span></span><span></span><span></span></buton>
+          <button id="u42" onclick="joinRoom('room42')">Unit-10-Electricity & Magnetism<span></span><span></span><span></span><span></span></buton>
+          <button id="u43" onclick="joinRoom('room43')">Unit-11-Modern Phyisics<span></span><span></span><span></span><span></span></buton>
+          <button id="unitphyback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+
+
+
+          <div id="unitchem" style="display:none;">
+          <button id="u44" onclick="joinRoom('room44')">Unit-1-Fundamentals Of Chemistry<span></span><span></span><span></span><span></span></buton>
+          <button id="u45" onclick="joinRoom('room45')">Unit-2-Solutions<span></span><span></span><span></span><span></span></buton>
+          <button id="u46" onclick="joinRoom('room46')">Unit-3-Acids & Bases<span></span><span></span><span></span><span></span></buton>
+          <button id="u47" onclick="joinRoom('room47')">Unit-4-Principles Of Metallurgy<span></span><span></span><span></span><span></span></buton>
+          <button id="u48" onclick="joinRoom('room48')">Unit-5-Electro Chemistry<span></span><span></span><span></span><span></span></buton>
+          <button id="u49" onclick="joinRoom('room49')">Unit-6-Corrotion<span></span><span></span><span></span><span></span></buton>
+          <button id="u50" onclick="joinRoom('room50')">Unit-7-Water Treatment<span></span><span></span><span></span><span></span></buton>
+          <button id="u51" onclick="joinRoom('room51')">Unit-8-Polymers<span></span><span></span><span></span><span></span></buton>
+          <button id="u52" onclick="joinRoom('room52')">Unit-9-Fuels<span></span><span></span><span></span><span></span></buton>
+          <button id="u53" onclick="joinRoom('room53')">Unit-10-Chemistry In Daily Life<span></span><span></span><span></span><span></span></buton>
+          <button id="u54" onclick="joinRoom('room54')">Unit-11-Enviromental Studies<span></span><span></span><span></span><span></span></buton>
+          <button id="unitchemback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+
+
+
+          <div id="unitbce" style="display:none;">
+          <button id="u55" onclick="joinRoom('room55')">Unit-1-Fundamentals Of Computers<span></span><span></span><span></span><span></span></buton>
+          <button id="u56" onclick="joinRoom('room56')">Unit-2-Programming Methodology<span></span><span></span><span></span><span></span></buton>
+          <button id="u57" onclick="joinRoom('room57')">Unit-3-Operating System Basics<span></span><span></span><span></span><span></span></buton>
+          <button id="u58" onclick="joinRoom('room58')">Unit-4-Computer Hardware & Networking Basics<span></span><span></span><span></span><span></span></buton>
+          <button id="u59" onclick="joinRoom('room59')">Unit-5-Emerging Trends In Computer Technologies<span></span><span></span><span></span><span></span></buton>
+          <button id="unitbceback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+
+
+          <div id="unitc" style="display:none;">
+          <button id="u60" onclick="joinRoom('room60')">Unit-1-Introduction To C Language<span></span><span></span><span></span><span></span></buton>
+          <button id="u61" onclick="joinRoom('room61')">Unit-2-Input & Output Statements,Operators & Expressions In C<span></span><span></span><span></span><span></span></buton>
+          <button id="u62" onclick="joinRoom('room62')">Unit-3-Decision Making,Iterative & Other Control Statements<span></span><span></span><span></span><span></span></buton>
+          <button id="u63" onclick="joinRoom('room63')">Unit-4-Arrays & Strings,Structures & Unions<span></span><span></span><span></span><span></span></buton>
+          <button id="u64" onclick="joinRoom('room64')">Unit-5-User Defined Functions,Pointers,File Management And Preprocessor Directives<span></span><span></span><span></span><span></span></buton>
+          <button id="unitcback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+          <div id="unitm2" style="display:none;">
+          <button id="u65" onclick="joinRoom('room65')">Unit-1-Indefinite Intregration<span></span><span></span><span></span><span></span></buton>
+          <button id="u66" onclick="joinRoom('room66')">Unit-2-Define Integration & Its Applications<span></span><span></span><span></span><span></span></buton>
+          <button id="u67" onclick="joinRoom('room67')">Unit-3-Differential Equations Of First Order<span></span><span></span><span></span><span></span></buton>
+          <button id="unitm2back">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+    
+
+          <div id="unitde" style="display:none;">
+          <button id="u68" onclick="joinRoom('room68')">Unit-1-Number Systems<span></span><span></span><span></span><span></span></buton>
+          <button id="u69" onclick="joinRoom('room69')">Unit-2-Logic Gates,Boolean Algebra & Basic Combinational Circuts<span></span><span></span><span></span><span></span></buton>
+          <button id="u70" onclick="joinRoom('room70')">Unit-3-Flip-Flops<span></span><span></span><span></span><span></span></buton>
+          <button id="u71" onclick="joinRoom('room71')">Unit-4-Counters & Registers<span></span><span></span><span></span><span></span></buton>
+          <button id="u72" onclick="joinRoom('room72')">Unit-5-Additional Combinational Circuits<span></span><span></span><span></span><span></span></buton>
+          <button id="unitdeback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>  
+
+          <div id="unitos" style="display:none;">
+          <button id="u73" onclick="joinRoom('room73')">Unit-1-Introduction To Operating System<span></span><span></span><span></span><span></span></buton>
+          <button id="u74" onclick="joinRoom('room74')">Unit-2-Process Management<span></span><span></span><span></span><span></span></buton>
+          <button id="u75" onclick="joinRoom('room75')">Unit-3-Synchronization & DeadLocks<span></span><span></span><span></span><span></span></buton>
+          <button id="u76" onclick="joinRoom('room76')">Unit-4-Memory Management<span></span><span></span><span></span><span></span></buton>
+          <button id="u77" onclick="joinRoom('room77')">Unit-5-Disk Scheduling And File Management<span></span><span></span><span></span><span></span></buton>
+          <button id="unitosback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>  
+  
+
+          <div id="unitds" style="display:none;">
+          <button  id="u78" onclick="joinRoom('room78')">Unit-1-Introduction To Data Structures,Searching & Sorting<span></span><span></span><span></span><span></span></buton>
+          <button  id="u79" onclick="joinRoom('room79')">Unit-2-Linked Storage Representation-Linked Lists<span></span><span></span><span></span><span></span></buton>
+          <button id="u80" onclick="joinRoom('room80')">Unit-3-Linear Data Structures-Stacks<span></span><span></span><span></span><span></span></buton>
+          <button id="u81" onclick="joinRoom('room81')">Unit-4-Linear Data Structures-Queues<span></span><span></span><span></span><span></span></buton>
+          <button id="u82" onclick="joinRoom('room82')">Unit-5-Non-Linear Data Structures-Trees<span></span><span></span><span></span><span></span></buton>
+          <button id="unitdsback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>  
+    
+          <div id="unitdbms" style="display:none;">
+          <button  id="u83" onclick="joinRoom('room83')">Unit-1-Concepts Of DBMS & RDBMS<span></span><span></span><span></span><span></span></buton>
+          <button  id="u84" onclick="joinRoom('room84')">Unit-2-Concepts Of SQL<span></span><span></span><span></span><span></span></buton>
+          <button id="u85" onclick="joinRoom('room85')">Unit-3-Basics Of PL/SQL<span></span><span></span><span></span><span></span></buton>
+          <button id="u86" onclick="joinRoom('room86')">Unit-4-Advanced PL/SQL<span></span><span></span><span></span><span></span></buton>
+          <button id="u87" onclick="joinRoom('room87')">Unit-5-Concepts Of NoSQL & MongoDB<span></span><span></span><span></span><span></span></buton>
+          <button id="unitdbmsback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>  
+          <div id="unitm3" style="display:none;">
+          <button id="u88" onclick="joinRoom('room88')">Unit-1-Higher Order Linear Differential Equations With Constant Coefficients<span></span><span></span><span></span><span></span></buton>
+          <button id="u89" onclick="joinRoom('room89')">Unit-2-Laplace Transforms<span></span><span></span><span></span><span></span></buton>
+                            <button id="u90" onclick="joinRoom('room90')">Unit-3-Fourier Series<span></span><span></span><span></span><span></span></buton>
+                            <button id="unitm3back">Back<span></span><span></span><span></span><span></span></buton>
+                            </div>  
+        
+                            <div id="unitwt" style="display:none;">
+                              <button id="u91" onclick="joinRoom('room91')">Unit-1-Principles Of Web Designing & HTML Introduction<span></span><span></span><span></span><span></span></buton>
+                              <button id="u92" onclick="joinRoom('room92')">Unit-2-Understand Various HTML Tags & Usage Of Style Sheets<span></span><span></span><span></span><span></span></buton>
+                              <button id="u93" onclick="joinRoom('room93')">Unit-3-Understand XML & Client Side Scripting Using JavaScript<span></span><span></span><span></span><span></span></buton>
+                              <button id="u94" onclick="joinRoom('room94')">Unit-4-JavaScript Ajax & Jquery<span></span><span></span><span></span><span></span></buton>
+                              <button id="u95" onclick="joinRoom('room95')">Unit-5-WebServers & Server Side Scripting Using PHP<span></span><span></span><span></span><span></span></buton>
+                              <button id="unitwtback">Back<span></span><span></span><span></span><span></span></buton>
+                              </div>  
+                              <div id="unitcomp" style="display:none;">
+                                <button id="u96" onclick="joinRoom('room96')">Unit-1-CPU Organization<span></span><span></span><span></span><span></span></buton>
+                                <button id="u97" onclick="joinRoom('room97')">Unit-2-Information Representation,Arithmetic Operations<span></span><span></span><span></span><span></span></buton>
+                                <button id="u98" onclick="joinRoom('room98')">Unit-3-Memory Organization<span></span><span></span><span></span><span></span></buton>
+                                <button id="u99" onclick="joinRoom('room99')">Unit-4-I/O Organization<span></span><span></span><span></span><span></span></buton>
+                                <button id="u100" onclick="joinRoom('room100')">Unit-5-Fundamenals Of 8086 & Advanced Processors<span></span><span></span><span></span><span></span></buton>
+                                <button id="unitcompback">Back<span></span><span></span><span></span><span></span></buton>
+                                </div>  
+            
+        
+                                <div id="unitok" style="display:none;">
+                                  <button id="u101" onclick="joinRoom('room101')">Unit-1-Object Oriented Programming Concepts & Introduction To C++<span></span><span></span><span></span><span></span></buton>
+                                  <button id="u102" onclick="joinRoom('room102')">Unit-2-Functions,Arrays,Pointers & References<span></span><span></span><span></span><span></span></buton>
+                                  <button id="u103" onclick="joinRoom('room103')">Unit-3-Constructors,Destructors & Operator OverLoading<span></span><span></span><span></span><span></span></buton>
+                                  <button id="u104" onclick="joinRoom('room104')">Unit-4-Inheritance & Virtual Functions<span></span><span></span><span></span><span></span></buton>
+                                  <button id="u105" onclick="joinRoom('room105')">Unit-5-C++ I/O & Templates<span></span><span></span><span></span><span></span></buton>
+                                  <button id="unitokback">Back<span></span><span></span><span></span><span></span></buton>
+                                  </div>  
+              
+                                  <div id="unitcn" style="display:none;">
+                                    <button id="u106" onclick="joinRoom('room106')">Unit-1-Introduction To Networks<span></span><span></span><span></span><span></span></buton>
+                                    <button id="u107" onclick="joinRoom('room107')">Unit-2-LAN Components,Devices,Tools & Network Topologies<span></span><span></span><span></span><span></span></buton>
+                                    <button id="u108" onclick="joinRoom('room108')">Unit-3-Network Addressing & Sub-Netting<span></span><span></span><span></span><span></span></buton>
+                                    <button id="u109" onclick="joinRoom('room109')">Unit-4-Networks Protocols & Management<span></span><span></span><span></span><span></span></buton>
+                                    <button id="u110" onclick="joinRoom('room110')">Unit-5-Basic Network Administration<span></span><span></span><span></span><span></span></buton>
+                                    <button id="unitcnback">Back<span></span><span></span><span></span><span></span></buton>
+                                    </div>  
+
+
+
+                                    <div id="unitime" style="display:none;">
+                                      <button  id="u111" onclick="joinRoom('room111')">Unit-1-Principles And Functions Of Industrial Management<span></span><span></span><span></span><span></span></buton>
+                                      <button  id="u112" onclick="joinRoom('room112')">Unit-2-Organisation Structure & Organisational Behaviour<span></span><span></span><span></span><span></span></buton>
+                                      <button id="u113" onclick="joinRoom('room113')">Unit-3-Production Management<span></span><span></span><span></span><span></span></buton>
+                                      <button id="u114" onclick="joinRoom('room114')">Unit-4-Materials Management, Maintenance Management & Industrial Safety<span></span><span></span><span></span><span></span></buton>
+                                      <button id="u115" onclick="joinRoom('room115')">Unit-5-Entrepreneurship Development & Quality Management<span></span><span></span><span></span><span></span></buton>
+                                      <button id="unitimeback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>  
+
+                                      <div id="unitjp" style="display:none;">
+                                        <button  id="u116" onclick="joinRoom('room116')">Unit-1-Basics Of Java And Overloadingt<span></span><span></span><span></span><span></span></buton>
+                                        <button  id="u117" onclick="joinRoom('room117')">Unit-2-Concepts Of Inheritance, Overriding,Interfaces And Packages<span></span><span></span><span></span><span></span></buton>
+                                        <button id="u118" onclick="joinRoom('room118')">Unit-3-I/O Streams And Collections<span></span><span></span><span></span><span></span></buton>
+                                        <button id="u119" onclick="joinRoom('room119')">Unit-4-Exception Handling And Multithreaded Programming<span></span><span></span><span></span><span></span></buton>
+                                        <button id="u120" onclick="joinRoom('room120')">Unit-5-Applets, AWT And Event Handling <span></span><span></span><span></span><span></span></buton>
+                                        <button id="unitjpback">Back<span></span><span></span><span></span><span></span></buton>
+                                        </div>  
+                  
+                                        <div id="unitse" style="display:none;">
+                                          <button  id="u121" onclick="joinRoom('room121')">Unit-1-Basics Of Software Engineering Designs & Life Cycle Models<span></span><span></span><span></span><span></span></buton>
+                                          <button  id="u122" onclick="joinRoom('room122')">Unit-2-Software Project Management<span></span><span></span><span></span><span></span></buton>
+                                          <button id="u123" onclick="joinRoom('room123')">Unit-3-Requirement Analysis & Specifications<span></span><span></span><span></span><span></span></buton>
+                                          <button id="u124" onclick="joinRoom('room124')">Unit-4-Software Design, Coding<span></span><span></span><span></span><span></span></buton>
+                                          <button id="u125" onclick="joinRoom('room125')">Unit-5-Software Testing,Debugging,Reliability, Quality Management & Maintenance <span></span><span></span><span></span><span></span></buton>
+                                          <button id="unitseback">Back<span></span><span></span><span></span><span></span></buton>
+                                        </div>  
+
+
+
+                                          <div id="unitiot" style="display:none;">
+                                            <button  id="u126" onclick="joinRoom('room126')">Unit-1-Introduction Of IOT<span></span><span></span><span></span><span></span></buton>
+                                            <button  id="u127" onclick="joinRoom('room127')">Unit-2-Data Protocols<span></span><span></span><span></span><span></span></buton>
+                                            <button id="u128" onclick="joinRoom('room128')">Unit-3-Communication Technologies<span></span><span></span><span></span><span></span></buton>
+                                            <button id="u129" onclick="joinRoom('room129')">Unit-4-Wireless Sensor Networks <span></span><span></span><span></span><span></span></buton>
+                                            <button id="u130" onclick="joinRoom('room130')">Unit-5-Cloud Computing <span></span><span></span><span></span><span></span></buton>
+                                            <button id="unitiotback">Back<span></span><span></span><span></span><span></span></buton>
+                                            </div>  
+                                         
+                                            <div id="unitpp" style="display:none;">
+                                              <button  id="u131" onclick="joinRoom('room131')">Unit-1-Python Programming Introduction<span></span><span></span><span></span><span></span></buton>
+                                              <button  id="u132" onclick="joinRoom('room132')">Unit-2-Control Flow And Loops<span></span><span></span><span></span><span></span></buton>
+                                              <button id="u133" onclick="joinRoom('room133')">Unit-3-Functions And Arrays<span></span><span></span><span></span><span></span></buton>
+                                              <button id="u134" onclick="joinRoom('room134')">Unit-4-Data Structures<span></span><span></span><span></span><span></span></buton>
+                                              <button id="u135" onclick="joinRoom('room135')">Unit-5-Object Oriented Programming In Python And File Handling And Exception Handling<span></span><span></span><span></span><span></span></buton>
+            <button id="unitppback">Back<span></span><span></span><span></span><span></span></buton>  
+                                            </div>  
+                                           
+                  
+            
+      
+      
+  
+  
+  
+  
+
+
+
+
+    <div id="you" style="display:none;">
+      THEORY SUBJECTS
+    <button id="aieng">English(101)<span></span><span></span><span></span><span></span></buton>
+    <button id="aim1">Enginering Mathematics-1(102)<span></span><span></span><span></span><span></span></buton>
+    <button id="aiphy">Enginering Physics(103)<span></span><span></span><span></span><span></span></buton>
+    <button id="aichem">Enginering Chemistry & Environmental Studies(104)<span></span><span></span><span></span><span></span></buton>
+    <button id="aibaim">Basics Of Artificial Intelligence And Machine Learning(105)<span></span><span></span><span></span><span></span></buton>
+    <button id="aic">Programming In C(106)<span></span><span></span><span></span><span></span></buton>
+       PRACTICAL SUBJECTS
+    <button>Engineering Drawing(107)<span></span><span></span><span></span><span></span></buton>
+    <button id="back1stsemai">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="youu" style="display:none;">
+      THEORY SUBJECTS
+    <button id="aim2">Enginering Mathematics-2(301)<span></span><span></span><span></span><span></span></buton>
+    <button id="aipy">Python Programming(302)<span></span><span></span><span></span><span></span></buton>
+        <button id="aios">Operating System(303)<span></span><span></span><span></span><span></span></buton>
+        <button id="aide">Digital Electronics & Computer Organization(304)<span></span><span></span><span></span><span></span></buton>
+        <button id="aidbms">Data Base Management System(305)<span></span><span></span><span></span><span></span></buton>
+        <button id="back3rdsemai">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="youuu" style="display:none;">
+      THEORY SUBJECTS
+    <button id="aim3">Enginering Mathematics-3(401)<span></span><span></span><span></span><span></span></buton>
+    <button id="aiwt">Web Technologies(402)<span></span><span></span><span></span><span></span></buton>
+        <button id="aiai">Artificial Intelligence(403)<span></span><span></span><span></span><span></span></buton>
+        <button id="aijp">Java Programming(404)<span></span><span></span><span></span><span></span></buton>
+        <button id="aifml">Fundamentals Of Machine Learning(405)<span></span><span></span><span></span><span></span></buton>
+        <button id="back4rthsemai">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    <div id="youuuu" style="display:none;">
+      THEORY SUBJECTS
+    <button id="aiime">Industrial Management & Entrepreneurship(501)<span></span><span></span><span></span><span></span></buton>
+    <button id="ainlp">Natural Language Processin(502)<span></span><span></span><span></span><span></span></buton>
+        <button id="aise">Software Engineering(503)<span></span><span></span><span></span><span></span></buton>
+        <button id="aiiot">Internet Of Things(504)<span></span><span></span><span></span><span></span></buton>
+        <button id="aianndl">Artificial Neural Networks And Deep Learnin(505)<span></span><span></span><span></span><span></span></buton>
+        <button id="back5thsemai">Back<span></span><span></span><span></span><span></span></buton>
+    </div>
+
+    
+    
+    <div id="aiuniteng" style="display:none;">
+      <button id="u136" onclick="joinRoom('room136')" >Unit-1-English For Employability<span></span><span></span><span></span><span></span></buton>
+      <button id="u137" onclick="joinRoom('room137')">Unit-2-Living In Harmony<span></span><span></span><span></span><span></span></buton>
+      <button id="u138" onclick="joinRoom('room138')">Unit-3-Connect With Care<span></span><span></span><span></span><span></span></buton>
+      <button id="u139" onclick="joinRoom('room139')">Unit-4-Humour For Happiness<span></span><span></span><span></span><span></span></buton>
+      <button id="u140" onclick="joinRoom('room140')">Unit-5-Never Ever Give Up!<span></span><span></span><span></span><span></span></buton>
+      <button id="u141" onclick="joinRoom('room141')" >Unit-6-Preserve Or Perish<span></span><span></span><span></span><span></span></buton>
+      <button id="u142" onclick="joinRoom('room142')">Unit-7-The Rainbow Of Diversity<span></span><span></span><span></span><span></span></buton>
+      <button id="u143" onclick="joinRoom('room143')">Unit-8-New Challenges-Newer Ideas<span></span><span></span><span></span><span></span></buton>
+      <button id="u144" onclick="joinRoom('room144')" >Unit-9-The End Point First!<span></span><span></span><span></span><span></span></buton>
+      <button id="u145" onclick="joinRoom('room145')" >Unit-10-The Equal Halves<span></span><span></span><span></span><span></span></buton>
+      <button id="u146" onclick="joinRoom('room146')">Unit-11-Dealing With Disaster<span></span><span></span><span></span><span></span></buton>
+      <button id="aiengback">Back<span></span><span></span><span></span><span></span></buton>
+      </div>   
+
+
+    <div id="aiunitm1" style="display:none;">
+        Unit-1
+      <button id="u147" onclick="joinRoom('room147')">Lesson-1-Relations & Functions<span></span><span></span><span></span><span></span></buton>
+      <button  id="u148" onclick="joinRoom('room148')">Lesson-2-Partial Fractions<span></span><span></span><span></span><span></span></buton>
+        <button id="u149" onclick="joinRoom('room149')">Lesson-3-Matrices & Determinants<span></span><span></span><span></span><span></span></buton>
+        Unit-2
+        <button id="u150" onclick="joinRoom('room150')">Lesson-4-Trigonometric Ratios<span></span><span></span><span></span><span></span></buton>
+        <button id="u151" onclick="joinRoom('room151')">Lesson-5-Compound Angles<span></span><span></span><span></span><span></span></buton>
+        <button id="u152" onclick="joinRoom('room152')">Lesson-6-Multiple & Submultiples Angles<span></span><span></span><span></span><span></span></buton>
+        <button id="u153" onclick="joinRoom('room153')">Lesson-7-Transformations<span></span><span></span><span></span><span></span></buton>
+        <button id="u154" onclick="joinRoom('room154')">Lesson-8-Inverse Trigonometric Functions<span></span><span></span><span></span><span></span></buton>
+        <button id="u155" onclick="joinRoom('room155')">Lesson-9-Trigonometric Equations<span></span><span></span><span></span><span></span></buton>
+        <button id="u156" onclick="joinRoom('room156')">Lesson-10-Properties Of Triangles<span></span><span></span><span></span><span></span></buton>
+        <button id="u157" onclick="joinRoom('room157')">Lesson-11-Hyperbolic Functios<span></span><span></span><span></span><span></span></buton>
+        <button id="u158" onclick="joinRoom('room158')">Lesson-12-Complex Numbers<span></span><span></span><span></span><span></span></buton>
+        Unit-3
+        <button id="u159" onclick="joinRoom('room159')">Lesson-13-Stright Lines<span></span><span></span><span></span><span></span></buton>
+        <button id="u160" onclick="joinRoom('room160')">Lesson-14-Circles<span></span><span></span><span></span><span></span></buton>
+        <button id="u161" onclick="joinRoom('room161')">Lesson-15-Conicsections<span></span><span></span><span></span><span></span></buton>
+        Unit-4
+        <button id="u162" onclick="joinRoom('room162')">Lesson-16-Limits & Continuity<span></span><span></span><span></span><span></span></buton>
+        <button id="u163" onclick="joinRoom('room163')">Lesson-17-Differentiation<span></span><span></span><span></span><span></span></buton>
+        Unit-5
+        <button id="u164" onclick="joinRoom('room164')">Lesson-18-Geometrical Applications<span></span><span></span><span></span><span></span></buton>
+        <button id="u165" onclick="joinRoom('room165')">Lesson-19-Physical Applications<span></span><span></span><span></span><span></span></buton>
+        <button id="u166" onclick="joinRoom('room166')">Lesson-20-Maxima & Minima<span></span><span></span><span></span><span></span></buton>
+        <button id="u167" onclick="joinRoom('room167')">Lesson-21-Errors & Approximations<span></span><span></span><span></span><span></span></buton>
+        <button id="aim1back">Back<span></span><span></span><span></span><span></span></buton>
+        </div>   
+
+
+
+        <div id="aiunitphy" style="display:none;">
+          <button >Unit-1-Units & Dimensions<span></span><span></span><span></span><span></span></buton>
+          <button >Unit-2-Elements Of Vectors<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-3-Dynamics<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-4-Frictions<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-5-Work,Power&Energy<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-6-Simple Harmonic Motion<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-7-Heat & ThermoDynamics<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-8-Sound<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-9-Properties Of Matter<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-10-Electricity & Magnetism<span></span><span></span><span></span><span></span></buton>
+          <button>Unit-11-Modern Phyisics<span></span><span></span><span></span><span></span></buton>
+          <button id="aiphyback">Back<span></span><span></span><span></span><span></span></buton>
+          </div>   
+
+
+
+          <div id="aiunitchem" style="display:none;">
+            <button >Unit-1-Fundamentals Of Chemistry<span></span><span></span><span></span><span></span></buton>
+            <button >Unit-2-Solutions<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-3-Acids & Bases<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-4-Principles Of Metallurgy<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-5-Electro Chemistry<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-6-Corrotion<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-7-Water Treatment<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-8-Polymers<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-9-Fuels<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-10-Chemistry In Daily Life<span></span><span></span><span></span><span></span></buton>
+            <button>Unit-11-Enviromental Studies<span></span><span></span><span></span><span></span></buton>
+            <button id="aichemback">Back<span></span><span></span><span></span><span></span></buton>
+            </div>   
+
+
+
+            <div id="aiunitbaim" style="display:none;">
+              <button >Unit-1-Fundamentals Of Computers<span></span><span></span><span></span><span></span></buton>
+              <button >Unit-2-Programming Methodology<span></span><span></span><span></span><span></span></buton>
+              <button>Unit-3-Operating System Basics<span></span><span></span><span></span><span></span></buton>
+              <button>Unit-4-Computer Hardware & Networking Basics<span></span><span></span><span></span><span></span></buton>
+              <button>Unit-5-Basics Of Data Structures And Emerging Trends In Computer Technologies<span></span><span></span><span></span><span></span></buton>
+              <button id="aibaimback">Back<span></span><span></span><span></span><span></span></buton>
+              </div>   
+
+
+              <div id="aiunitc" style="display:none;">
+                <button >Unit-1-Introduction To C Language<span></span><span></span><span></span><span></span></buton>
+                <button >Unit-2-Input & Output Statements,Operators & Expressions In C<span></span><span></span><span></span><span></span></buton>
+                <button>Unit-3-Decision Making,Iterative & Other Control Statements<span></span><span></span><span></span><span></span></buton>
+                <button>Unit-4-Arrays & Strings,Structures & Unions<span></span><span></span><span></span><span></span></buton>
+                <button>Unit-5-User Defined Functions,Pointers,File Management And Preprocessor Directives<span></span><span></span><span></span><span></span></buton>
+                <button id="aicback">Back<span></span><span></span><span></span><span></span></buton>
+                </div>   
+
+                <div id="aiunitm2" style="display:none;">
+                  <button >Unit-1-Indefinite Intregration<span></span><span></span><span></span><span></span></buton>
+                  <button >Unit-2-Define Integration & Its Applications<span></span><span></span><span></span><span></span></buton>
+                  <button>Unit-3-Differential Equations Of First Order<span></span><span></span><span></span><span></span></buton>
+                  <button id="aim2back">Back<span></span><span></span><span></span><span></span></buton>
+                  </div>   
+
+                  <div id="aiunitpy" style="display:none;">
+                    
+                      <button >Unit-1-Python Programming Introduction<span></span><span></span><span></span><span></span></buton>
+                      <button >Unit-2-Standard Data Types & Control Flow<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-3-Data Structures<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-4-Functions<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-5-Object Oriented Programming In Python And File Handling And Exception Handling<span></span><span></span><span></span><span></span></buton>
+                      <button id="aipyback">Back<span></span><span></span><span></span><span></span></buton>
+                   
+
+                    </div>   
+
+                    <div id="aiunitos" style="display:none;">
+                      <button >Unit-1-Introduction To Operating System<span></span><span></span><span></span><span></span></buton>
+                      <button >Unit-2-Process Management<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-3-Synchronization & DeadLocks<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-4-Memory Management<span></span><span></span><span></span><span></span></buton>
+                      <button>Unit-5-Disk Scheduling And File Management<span></span><span></span><span></span><span></span></buton>
+                      <button id="aiosback">Back<span></span><span></span><span></span><span></span></buton>
+                      </div>   
+
+                      <div id="aiunitdeco" style="display:none;">
+                        <button >Unit-1-Number Systems,Logic Gates,Boolean Algebra & Basic Combinational Circuts<span></span><span></span><span></span><span></span></buton>
+                        <button >Unit-2-Flip-Flops,Counters & Registers<span></span><span></span><span></span><span></span></buton>
+                        <button>Unit-3-Information Representation & CPU Organization<span></span><span></span><span></span><span></span></buton>
+                        <button>Unit-4-Memory Management<span></span><span></span><span></span><span></span></buton>
+                        <button>Unit-5-I/O Organization<span></span><span></span><span></span><span></span></buton>
+                        <button id="aidecoback">Back<span></span><span></span><span></span><span></span></buton>
+      
+                        </div>   
+
+                        <div id="aiunitdbms" style="display:none;">
+                          <button >Unit-1-Concepts Of DBMS & RDBMS<span></span><span></span><span></span><span></span></buton>
+                          <button >Unit-2-Concepts Of SQL<span></span><span></span><span></span><span></span></buton>
+                          <button>Unit-3-Basics Of PL/SQL<span></span><span></span><span></span><span></span></buton>
+                          <button>Unit-4-Advanced PL/SQL<span></span><span></span><span></span><span></span></buton>
+                          <button>Unit-5-Concepts Of NoSQL & MongoDB<span></span><span></span><span></span><span></span></buton>
+                          <button id="aidbmsback">Back<span></span><span></span><span></span><span></span></buton>
+                          </div>   
+
+                          <div id="aiunitm3" style="display:none;">
+                            <button >Unit-1-Higher Order Linear Differential Equations With Constant Coefficients<span></span><span></span><span></span><span></span></buton>
+                            <button >Unit-2-Laplace Transforms<span></span><span></span><span></span><span></span></buton>
+                            <button>Unit-3-Fourier Series<span></span><span></span><span></span><span></span></buton>
+                            <button id="aim3back">Back<span></span><span></span><span></span><span></span></buton>
+                            </div>   
+  
+                            <div id="aiunitwt" style="display:none;">
+                              <button >Unit-1-Principles Of Web Designing & HTML Introduction<span></span><span></span><span></span><span></span></buton>
+                              <button >Unit-2-Understand Various HTML Tags & Usage Of Style Sheets<span></span><span></span><span></span><span></span></buton>
+                              <button>Unit-3-Understand XML & Client Side Scripting Using JavaScript<span></span><span></span><span></span><span></span></buton>
+                              <button>Unit-4-JavaScript Ajax & Jquery<span></span><span></span><span></span><span></span></buton>
+                              <button>Unit-5-WebServers & Server Side Scripting Using PHP<span></span><span></span><span></span><span></span></buton>
+                              <button id="aiwtback">Back<span></span><span></span><span></span><span></span></buton>
+                              </div>   
+    
+                              <div id="aiunitai" style="display:none;">
+                                <button >Unit-1-Introduction To PROLOG<span></span><span></span><span></span><span></span></buton>
+                                <button >Unit-2-Problems And Search Methods In AI<span></span><span></span><span></span><span></span></buton>
+                                <button >Unit-3-Knowledge Representation<span></span><span></span><span></span><span></span></buton>
+                                <button>Unit-4-Game Theory<span></span><span></span><span></span><span></span></buton>
+                                <button>Unit-5-Fuzzy Logic<span></span><span></span><span></span><span></span></buton>
+                                <button id="aiaiback">Back<span></span><span></span><span></span><span></span></buton>
+                                </div>   
+      
+                                <div id="aiunitjp" style="display:none;">
+                                  <button >Unit-1-Basics Of Java And Overloadingt<span></span><span></span><span></span><span></span></buton>
+                                  <button >Unit-2-Concepts Of Inheritance, Overriding,Interfaces And Packages<span></span><span></span><span></span><span></span></buton>
+                                  <button>Unit-3-I/O Streams And Collections<span></span><span></span><span></span><span></span></buton>
+                                  <button>Unit-4-Exception Handling And Multithreaded Programming<span></span><span></span><span></span><span></span></buton>
+                                  <button>Unit-5-Applets, AWT And Event Handling <span></span><span></span><span></span><span></span></buton>
+                                  <button id="aijpback">Back<span></span><span></span><span></span><span></span></buton>
+                                  </div>   
+        
+                                  <div id="aiunitfml" style="display:none;">
+                                    <button >Unit-1-Introduction To Machine Learning <span></span><span></span><span></span><span></span></buton>
+                                    <button >Unit-2-Process Of Machine Learning<span></span><span></span><span></span><span></span></buton>
+                                    <button>Unit-3-Probability And Bayesian Learning<span></span><span></span><span></span><span></span></buton>
+                                    <button>Unit-4-Supervised Learning<span></span><span></span><span></span><span></span></buton>
+                                    <button>Unit-5-UnSupervised Learning<span></span><span></span><span></span><span></span></buton>
+                                    <button id="aifmlback">Back<span></span><span></span><span></span><span></span></buton>
+                                    </div>   
+          
+                                    <div id="aiunitime" style="display:none;">
+                                      
+                                        <button >Unit-1-Introduction To Machine Learning <span></span><span></span><span></span><span></span></buton>
+                                        <button >Unit-2-Process Of Machine Learning<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-3-Probability And Bayesian Learning<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-4-Supervised Learning<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-5-UnSupervised Learning<span></span><span></span><span></span><span></span></buton>
+                                        <button id="aiimeback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>   
+            
+                                      <div id="aiunitnlp" style="display:none;">
+                                      
+                                        <button >Unit-1-Introduction To Natural Language Processing <span></span><span></span><span></span><span></span></buton>
+                                        <button >Unit-2-Word Level Analysis<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-3-Syntactic Analysis<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-4-Semantics And Pragmatics<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-5-Discourse Analysis And Lexical Resources<span></span><span></span><span></span><span></span></buton>
+                                        <button id="ainlpback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>   
+                                      <div id="aiunitse" style="display:none;">
+                                      
+                                        <button >Unit-1-Basics Of Software Engineering Designs & Life Cycle Models<span></span><span></span><span></span><span></span></buton>
+                                          <button >Unit-2-Software Project Management<span></span><span></span><span></span><span></span></buton>
+                                          <button>Unit-3-Requirement Analysis & Specifications<span></span><span></span><span></span><span></span></buton>
+                                          <button>Unit-4-Software Design, Coding<span></span><span></span><span></span><span></span></buton>
+                                          <button>Unit-5-Software Testing,Debugging,Reliability, Quality Management & Maintenance <span></span><span></span><span></span><span></span></buton>
+                                          <button id="aiseback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>   
+                                      <div id="aiunitiot" style="display:none;">
+                                      
+                                        <button >Unit-1-Introduction Of IOT<span></span><span></span><span></span><span></span></buton>
+                                        <button >Unit-2-Data Protocols<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-3-Communication Technologies<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-4-Wireless Sensor Networks <span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-5-Cloud Computing <span></span><span></span><span></span><span></span></buton>
+                                        <button id="aiiotback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>   
+                                      <div id="uff" style="display:none;">
+                                      
+                                        <button >Unit-1-INTRODUCTIONTOARTIFICIAL NEURALNETWORKS <span></span><span></span><span></span><span></span></buton>
+                                        <button >Unit-2-FEED FORWARDNEURAL NETWORKS<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-3-OTHER ARTIFICIAL NEURAL  NETWORK ARCHITECTURES<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-4-DEEP LEARNING<span></span><span></span><span></span><span></span></buton>
+                                        <button>Unit-5-RECUURENT NEURAL NETWORK<span></span><span></span><span></span><span></span></buton>
+                                        <button id="aiuffback">Back<span></span><span></span><span></span><span></span></buton>
+                                      </div>   
+            
+                                
+
+    <!-- Connect to Chat Server button -->
+    
+    
+    <!-- Input Form-->
+    
+    <div id="hide" style="display: none;">
+      
+      <div  style="margin-bottom: 20px;">  
+        <input type="text" id="searchInput" placeholder="Search messages">
+        
+        <button id="searchMessages"  onclick="searchMessages()"  >Search<span></span><span></span><span></span><span></span></buton>
+        <div id="searchResults"></div>
+        <button id="chatgpt">Show Previous Disscussed Data<span></span><span></span><span></span><span></span></button>
+      <button id="chatgpt3" style="display: none;">Close<span></span><span></span><span></span><span></span></button>   
+      </div>
+         <div id="chatgpt2" style="display: none;">
+          
+          <h3>DATA....................!</h3>
+         
+         <div id="chat-history"></div>
+        </div>
+
+
+  <div id="chat" class="message-container"></div>
+
+
+  <div style="margin-top: 340px; position: scroll;" id="ip">
+    <label for="message">Message:</label>
+    <input  type="text" id="message"  placeholder="Enter message">
+    <button id="sendButton" onclick="sendMessage()" ><span></span><span></span><span></span><span></span>Send</buton>
+     
+    </div>
+    <div id="messages" ></div>
+</div>
+ 
+</div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/index.js"></script>
+  <script>
+    message.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Trigger the click event of the send button
+        sendButton.click();
+    }
+});
+
+
+
+
+
+
+
+
+       const chatgpt= document.getElementById('chatgpt');
+      chatgpt.addEventListener('click', () => {
+     
+        chatgpt2.style.display='block';
+        chatgpt3.style.display='block';
+      chatgpt.style.display='none';});
+
+      const chatgpt3= document.getElementById('chatgpt3');
+      chatgpt3.addEventListener('click', () => {
+     
+        chatgpt.style.display='block';
+      chatgpt2.style.display='none';
+      chatgpt3.style.display='none';
+    });
+
+
+    const bodyclick= document.getElementById('bodyclick');
+    bodyclick.addEventListener('click', () => {
+     
+      bodynone.style.display='block';
+       
+      bodyclick.style.display='none';});
+
+
+
+
+
+
+
+
+
+      
+      
+      
+     // Declare socket outside of the click event
+   const socket = io();
+        let currentRoom = null;
+
+
+
+
+
+
+
+        function displayChatHistory(chatHistory) {
+    const chatHistoryDiv = document.getElementById('chat-history');
+
+    chatHistory.forEach((message) => {
+        const messageDiv = document.createElement('div');
+        
+        messageDiv.textContent = `${message.sender}: ${message.message}`;
+        chatHistoryDiv.appendChild(messageDiv);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Join a room when the page loads (you may need to adapt this logic)
+const defaultRoom = 'general'; // Change this to your default room
+socket.emit('joinRoom', defaultRoom);
+
+// Listen for roomData event to receive chat history
+socket.on('roomData', (chatHistory) => {
+    displayChatHistory(chatHistory);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const searchInput = document.getElementById('searchInput');
+        const searchMessagesButton = document.getElementById('searchMessages');
+        const searchResults = document.getElementById('searchResults');
+        const messagesContainer = document.getElementById('messages');
+        const messageInput = document.getElementById('message');
+      //  const sendMessageButton = document.getElementById('sendMessage');
+   
+   
+        // Function to search for messages
+       async function searchMessages() {
+            const searchTerm = searchInput.value;
+            //const searchTerm = document.getElementById("searchInput").value;
+            try {
+    const response = await fetch(`/search-messages?term=${encodeURIComponent(searchTerm)}`);
+    
+    if (response.ok) {
+        const data = await response.json();
+        searchResults.innerHTML = '';
+
+        if (Array.isArray(data)) {
+            if (data.length === 0) {
+                searchResults.textContent = 'No results found.';
+            } else {
+                data.forEach(result => {
+                    const resultElement = document.createElement('div');
+                    resultElement.textContent = result; // Adjust this to match your server response
+                    searchResults.appendChild(resultElement);
+                });
+            }
+        } else {
+            searchResults.textContent = 'Invalid server response structure.';
+        }
+    } else {
+        searchResults.textContent = 'Error searching messages. Status: ' + response.status;
+    }
+} catch (error) {
+    console.error('Error searching messages:', error);
+}/*
+async function searchMessages() {
+    const searchTerm = searchInput.value;
+
+    try {
+        const response = await fetch(`/search-messages?term=${encodeURIComponent(searchTerm)}`);
+
+        if (response.ok) {
+            const data = await response.json();
+            searchResults.innerHTML = '';
+
+            if (Array.isArray(data.results)) {
+                if (data.results.length === 0) {
+                    searchResults.textContent = 'No results found.';
+                } else {
+                    data.results.forEach(result => {
+                        const resultElement = document.createElement('div');
+                        resultElement.textContent = result;
+                        searchResults.appendChild(resultElement);
+                    });
+                }
+            } else {
+                searchResults.textContent = 'Invalid server response structure.';
+            }
+        } else {
+            searchResults.textContent = 'Error searching messages. Status: ' + response.status;
+        }
+    } catch (error) {
+        console.error('Error searching messages:', error);
+    }*/
+
+
+
+
+           /* try {
+                const response = await fetch(`/search-messages?term=${encodeURIComponent(searchTerm)}`);
+             
+                if (response.ok) {
+                    const data = await response.json();
+                  
+                    searchResults.innerHTML = '';
+
+                    if (data.results.length === 0) {
+                        searchResults.textContent = 'No results found.';
+                    } else {
+                        data.results.forEach(result => {
+                            const resultElement = document.createElement('div');
+                            resultElement.textContent = result.message;
+                            searchResults.appendChild(resultElement);
+                        });
+                    }
+                } else {
+                    searchResults.textContent = 'Error searching messages.';
+                }
+            } catch (error) {
+                console.error('Error searching messages:', error);
+            }*/
+        }
+         // Function to display a message in the chat
+         function displayMessage(messageData) {
+            const messageElement = document.createElement('div');
+           // messageElement.textContent = `${messageData.sender}: ${messageData.message}`;
+            messagesContainer.appendChild(messageElement);
+        }
+
+        /*Function to send a chat message to the server
+        function sendMessage() {
+            const message = messageInput.value;
+            socket.emit('chatMessage','', message);
+            messageInput.value = '';
+        }*/
+       
+
+        searchMessagesButton.addEventListener('click', searchMessages);
+       // sendMessageButton.addEventListener('click', sendMessage);
+
+socket.on('message', (messageData) => {
+    displayChatMessage(messageData);
+});
+function displayChatMessage(messageData) {
+    const chatHistoryDiv = document.getElementById('chat-history');
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message'; // Apply the chat message class
+
+    // Create a <span> element for the sender's name and style it
+    const senderSpan = document.createElement('span');
+    senderSpan.className = 'sender-name'; // Apply the sender-name class
+    senderSpan.textContent = `${messageData.sender}: `;
+
+    // Create a <span> element for the message content
+    const messageSpan = document.createElement('span');
+    messageSpan.textContent = messageData.message;
+
+    // Append the sender's name and message content to the messageDiv
+    messageDiv.appendChild(senderSpan);
+    messageDiv.appendChild(messageSpan);
+
+    chatHistoryDiv.appendChild(messageDiv);
+}
+    });
+  
+
+
+
+
+
+function joinRoom(roomName) {
+            currentRoom = roomName;
+            socket.emit('joinRoom', roomName);
+           // clearChat();
+            document.getElementById('hide').style.display = 'block';
+        }
+
+        function sendMessage() {
+            const message = document.getElementById('message').value;
+            if (message.trim() !== '') {
+                socket.emit('chatMessage', currentRoom, message);
+                document.getElementById('message').value = '';
+            }
+        }
+
+        socket.on('message', (data) => {
+            const { message, sender } = data;
+            displayMessage(message, sender === socket.id ? 'sent' : 'received');
+        });
+
+        function displayMessage(message, messageType) {
+ const chatDiv = document.getElementById('chat');
+
+            /* Check if the message div already exists to avoid duplicates
+ const existingMessageDiv = chatDiv.querySelector(`.${messageType}[data-message="${message}"]`);
+            if (existingMessageDiv) {
+                return; // Do not append duplicate messages
+            }*/
+
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', messageType);
+            messageDiv.dataset.message = message; // Store message content as a data attribute
+            messageDiv.textContent = message;
+
+            chatDiv.appendChild(messageDiv);
+
+            // Scroll to the bottom of the chat
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+      /*  function clearChat() {
+            const chatDiv = document.getElementById('chat');
+            chatDiv.innerHTML = '';
+        }*/
+
+       function searchMessages() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const messages = document.querySelectorAll('#chat .message');
+
+            messages.forEach(message => {
+                const content = message.dataset.message.toLowerCase();
+                if (content.includes(searchQuery)) {
+                    message.style.display = 'block';
+                } else {
+                    message.style.display = 'none';
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Show Content button functionality
+    const showButton = document.getElementById('showButton');
+    const hiddenContent = document.getElementById('hiddenContent');
+    const connectButton = document.getElementById('connectButton');
+    const messageForm = document.getElementById('message-form');
+    const additionalButtons = document.getElementById('additionalButtons');
+    
+
+    showButton.addEventListener('click', () => {
+      hiddenContent.style.display = 'block';
+      showButton.style.display = 'none';
+    });
+
+    // Button click event handlers
+    const cmeButton = document.getElementById('cmeButton');
+    const aiButton = document.getElementById('aiButton');
+    const mechButton = document.getElementById('mechButton');
+    const civilButton = document.getElementById('civilButton');
+
+    cmeButton.addEventListener('click', () => {
+      hi.style.display = 'block';
+      hiddenContent.style.display='none';
+    });
+
+    aiButton.addEventListener('click', () => {
+      hii.style.display = 'block';
+      
+      hiddenContent.style.display = 'none';
+    });
+
+    mechButton.addEventListener('click', () => {
+      hiii.style.display = 'block';
+      
+      hiddenContent.style.display = 'none';
+    });
+
+    civilButton.addEventListener('click', () => {
+      hiiii.style.display = 'block';
+      hiddenContent.style.display = 'none';
+      
+    });
+
+
+    const sem1= document.getElementById('1stsem');
+    sem1.addEventListener('click', () => {
+      me.style.display='block';
+      hi.style.display='none';});
+
+      const sem3= document.getElementById('3rdsem');
+    sem3.addEventListener('click', () => {
+      mee.style.display='block';
+      hi.style.display='none';});
+
+      const sem4= document.getElementById('4rthsem');
+    sem4.addEventListener('click', () => {
+      meee.style.display='block';
+      hi.style.display='none';});
+
+      const sem5= document.getElementById('5thsem');
+    sem5.addEventListener('click', () => {
+      meeee.style.display='block';
+      hi.style.display='none';});
+
+
+
+
+     const eng= document.getElementById('eng');
+    eng.addEventListener('click', () => {
+      unit.style.display='block';
+      
+      me.style.display='none';});
+
+      
+
+
+      const m1= document.getElementById('m1');
+    m1.addEventListener('click', () => {
+      unitm1.style.display='block';
+      
+      me.style.display='none';});
+
+      const phy= document.getElementById('phy');
+    phy.addEventListener('click', () => {
+      unitphy.style.display='block';
+      
+      me.style.display='none';});
+
+      const chem= document.getElementById('chem');
+    chem.addEventListener('click', () => {
+      unitchem.style.display='block';
+      
+      me.style.display='none';});
+
+      const bce= document.getElementById('bce');
+    bce.addEventListener('click', () => {
+      unitbce.style.display='block';
+      
+      me.style.display='none';});
+
+      const c= document.getElementById('c');
+    c.addEventListener('click', () => {
+      unitc.style.display='block';
+      
+      me.style.display='none';});
+
+
+      const m2= document.getElementById('m2');
+    m2.addEventListener('click', () => {
+      unitm2.style.display='block';
+      
+      mee.style.display='none';});
+
+
+      const de= document.getElementById('de');
+    de.addEventListener('click', () => {
+      unitde.style.display='block';
+      
+      mee.style.display='none';});
+
+      const os= document.getElementById('os');
+    os.addEventListener('click', () => {
+      unitos.style.display='block';
+      
+      mee.style.display='none';});
+
+
+      const ds= document.getElementById('ds');
+    ds.addEventListener('click', () => {
+      unitds.style.display='block';
+      
+      mee.style.display='none';});
+
+
+      const dbms= document.getElementById('dbms');
+    dbms.addEventListener('click', () => {
+      unitdbms.style.display='block';
+      
+      mee.style.display='none';});
+
+      const m3= document.getElementById('m3');
+    m3.addEventListener('click', () => {
+      unitm3.style.display='block';
+      
+      meee.style.display='none';});
+
+      const wt= document.getElementById('wt');
+    wt.addEventListener('click', () => {
+      unitwt.style.display='block';
+      
+      meee.style.display='none';});
+
+
+      const comp= document.getElementById('comp');
+    comp.addEventListener('click', () => {
+      unitcomp.style.display='block';
+      
+      meee.style.display='none';});
+
+      const ok= document.getElementById('ok');
+    ok.addEventListener('click', () => {
+ unitok.style.display='block';
+      
+      meee.style.display='none';});
+
+
+      const cn= document.getElementById('cn');
+    cn.addEventListener('click', () => {
+      unitcn.style.display='block';
+      
+      meee.style.display='none';});
+
+
+      const ime= document.getElementById('ime');
+    ime.addEventListener('click', () => {
+      unitime.style.display='block';
+      
+      meeee.style.display='none';});
+
+      const jp= document.getElementById('jp');
+    jp.addEventListener('click', () => {
+      unitjp.style.display='block';
+      
+      meeee.style.display='none';});
+
+      const se= document.getElementById('se');
+    se.addEventListener('click', () => {
+      unitse.style.display='block';
+      
+      meeee.style.display='none';});
+
+      const iot= document.getElementById('iot');
+    iot.addEventListener('click', () => {
+      unitiot.style.display='block';
+      
+      meeee.style.display='none';});
+
+      const pp= document.getElementById('pp');
+    pp.addEventListener('click', () => {
+      unitpp.style.display='block';
+      
+      meeee.style.display='none';});
+
+
+      const sem1ai= document.getElementById('1stsemai');
+    sem1ai.addEventListener('click', () => {
+      you.style.display='block';
+      hii.style.display='none';});
+
+     const sem3ai= document.getElementById('3rdsemai');
+    sem3ai.addEventListener('click', () => {
+      youu.style.display='block';
+      hii.style.display='none';});
+
+      const sem4ai= document.getElementById('4rthsemai');
+    sem4ai.addEventListener('click', () => {
+      youuu.style.display='block';
+      hii.style.display='none';});
+
+      const sem5ai= document.getElementById('5thsemai');
+    sem5ai.addEventListener('click', () => {
+      youuuu.style.display='block';
+      hii.style.display='none';});
+
+
+
+
+      const aim1= document.getElementById('aim1');
+    aim1.addEventListener('click', () => {
+      aiunitm1.style.display='block';
+      
+      you.style.display='none';});
+
+      const aiphy= document.getElementById('aiphy');
+    aiphy.addEventListener('click', () => {
+      aiunitphy.style.display='block';
+      
+      you.style.display='none';});
+
+      const aichem= document.getElementById('aichem');
+    aichem.addEventListener('click', () => {
+      aiunitchem.style.display='block';
+      
+      you.style.display='none';});
+
+      const aibaim= document.getElementById('aibaim');
+    aibaim.addEventListener('click', () => {
+      aiunitbaim.style.display='block';
+      
+      you.style.display='none';});
+
+      const aic= document.getElementById('aic');
+    aic.addEventListener('click', () => {
+      aiunitc.style.display='block';
+      
+      you.style.display='none';});
+
+      const aieng= document.getElementById('aieng');
+    aieng.addEventListener('click', () => {
+      aiuniteng.style.display='block';
+      
+      you.style.display='none';});
+
+      const aim2= document.getElementById('aim2');
+    aim2.addEventListener('click', () => {
+      aiunitm2.style.display='block';
+      
+      youu.style.display='none';});
+
+      const aipy= document.getElementById('aipy');
+    aipy.addEventListener('click', () => {
+      aiunitpy.style.display='block';
+      
+      youu.style.display='none';});
+
+      const aios= document.getElementById('aios');
+    aios.addEventListener('click', () => {
+      aiunitos.style.display='block';
+      
+      youu.style.display='none';});
+
+      const aideco= document.getElementById('aide');
+    aideco.addEventListener('click', () => {
+      aiunitdeco.style.display='block';
+      
+      youu.style.display='none';});
+
+      const aidbms= document.getElementById('aidbms');
+    aidbms.addEventListener('click', () => {
+      aiunitdbms.style.display='block';
+      
+      youu.style.display='none';});
+
+      const aim3= document.getElementById('aim3');
+    aim3.addEventListener('click', () => {
+      aiunitm3.style.display='block';
+      
+      youuu.style.display='none';});
+
+      
+      const aiwt= document.getElementById('aiwt');
+    aiwt.addEventListener('click', () => {
+      aiunitwt.style.display='block';
+      
+      youuu.style.display='none';});
+
+      
+      const aiai= document.getElementById('aiai');
+    aiai.addEventListener('click', () => {
+      aiunitai.style.display='block';
+      
+      youuu.style.display='none';});
+
+      
+      const aijp= document.getElementById('aijp');
+    aijp.addEventListener('click', () => {
+      aiunitjp.style.display='block';
+      
+      youuu.style.display='none';});
+
+      
+      const aiime= document.getElementById('aiime');
+    aiime.addEventListener('click', () => {
+      aiunitime.style.display='block';
+      
+      youuuu.style.display='none';});
+
+      const ainlp= document.getElementById('ainlp');
+    ainlp.addEventListener('click', () => {
+      aiunitnlp.style.display='block';
+      
+      youuuu.style.display='none';});
+
+      const aise= document.getElementById('aise');
+    aise.addEventListener('click', () => {
+      aiunitse.style.display='block';
+      
+      youuuu.style.display='none';});
+
+      const aiiot= document.getElementById('aiiot');
+    aiiot.addEventListener('click', () => {
+      aiunitiot.style.display='block';
+      
+      youuuu.style.display='none';});
+
+      const aianndl= document.getElementById('aianndl');
+    aianndl.addEventListener('click', () => {
+    uff.style.display='block';
+      
+      youuuu.style.display='none';});
+
+      const aifml= document.getElementById('aifml');
+    aifml.addEventListener('click', () => {
+      aiunitfml.style.display='block';
+      
+      youuu.style.display='none';});
+
+      const back= document.getElementById('back');
+    back.addEventListener('click', () => {
+      showButton.style.display='block';
+      
+      hiddenContent.style.display='none';});
+
+      const backcme= document.getElementById('backcme');
+    backcme.addEventListener('click', () => {
+      hiddenContent.style.display='block';
+      
+      hi.style.display='none';});
+
+      const backai= document.getElementById('backai');
+    backai.addEventListener('click', () => {
+      hiddenContent.style.display='block';
+      
+      hii.style.display='none';});
+
+      const backmech= document.getElementById('backmech');
+    backmech.addEventListener('click', () => {
+      hiddenContent.style.display='block';
+      
+      hiii.style.display='none';});
+
+      const backcivil= document.getElementById('backcivil');
+    backcivil.addEventListener('click', () => {
+      hiddenContent.style.display='block';
+      
+      hiiii.style.display='none';});
+
+      
+      const back1stsemcme= document.getElementById('back1stsemcme');
+    back1stsemcme.addEventListener('click', () => {
+      hi.style.display='block';
+      
+      me.style.display='none';});
+
+      const cmeengback= document.getElementById('cmeengback');
+      cmeengback.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unit.style.display='none';});
+
+      const unitm1back= document.getElementById('unitm1back');
+      unitm1back.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unitm1.style.display='none';});
+
+      const unitphyback= document.getElementById('unitphyback');
+      unitphyback.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unitphy.style.display='none';});
+
+      const unitchemback= document.getElementById('unitchemback');
+      unitchemback.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unitchem.style.display='none';});
+
+      const unitbceback= document.getElementById('unitbceback');
+      unitbceback.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unitbce.style.display='none';});
+
+      const unitcback= document.getElementById('unitcback');
+      unitcback.addEventListener('click', () => {
+      me.style.display='block';
+      
+      unitc.style.display='none';});
+
+
+      const back3rdsemcme= document.getElementById('back3rdsemcme');
+      back3rdsemcme.addEventListener('click', () => {
+      hi.style.display='block';
+      
+      mee.style.display='none';});
+
+      const unitm2back= document.getElementById('unitm2back');
+      unitm2back.addEventListener('click', () => {
+      mee.style.display='block';
+      
+      unitm2.style.display='none';});
+
+      const unitdeback= document.getElementById('unitdeback');
+      unitdeback.addEventListener('click', () => {
+      mee.style.display='block';
+      
+      unitde.style.display='none';});
+
+      const unitosback= document.getElementById('unitosback');
+      unitosback.addEventListener('click', () => {
+      mee.style.display='block';
+      
+      unitos.style.display='none';});
+
+      const unitdsback= document.getElementById('unitdsback');
+      unitdsback.addEventListener('click', () => {
+      mee.style.display='block';
+      
+      unitds.style.display='none';});
+
+      const unitdbmsback= document.getElementById('unitdbmsback');
+      unitdbmsback.addEventListener('click', () => {
+      mee.style.display='block';
+      
+      unitdbms.style.display='none';});
+
+      const back4rthsemcme= document.getElementById('back4rthsemcme');
+      back4rthsemcme.addEventListener('click', () => {
+      hi.style.display='block';
+      
+      meee.style.display='none';});
+
+      const unitm3back= document.getElementById('unitm3back');
+      unitm3back.addEventListener('click', () => {
+      meee.style.display='block';
+      
+      unitm3.style.display='none';});
+
+      const unitwtback= document.getElementById('unitwtback');
+      unitwtback.addEventListener('click', () => {
+      meee.style.display='block';
+      
+      unitwt.style.display='none';});
+
+      const unitcompback= document.getElementById('unitcompback');
+      unitcompback.addEventListener('click', () => {
+      meee.style.display='block';
+      
+      unitcomp.style.display='none';});
+
+      const unitokback= document.getElementById('unitokback');
+      unitokback.addEventListener('click', () => {
+      meee.style.display='block';
+      
+      unitok.style.display='none';});
+
+      const unitcnback= document.getElementById('unitcnback');
+      unitcnback.addEventListener('click', () => {
+      meee.style.display='block';
+      unitcn.style.display='none';});
+
+      const back5thsemcme= document.getElementById('back5thsemcme');
+      back5thsemcme.addEventListener('click', () => {
+      hi.style.display='block';
+      
+
+      meeee.style.display='none';});
+
+
+      const unitimeback= document.getElementById('unitimeback');
+      unitimeback.addEventListener('click', () => {
+      meeee.style.display='block';
+      unitime.style.display='none';});
+
+      
+      const unitjpback= document.getElementById('unitjpback');
+      unitjpback.addEventListener('click', () => {
+      meeee.style.display='block';
+      unitjp.style.display='none';});
+
+      const unitseback= document.getElementById('unitseback');
+      unitseback.addEventListener('click', () => {
+      meeee.style.display='block';
+      unitse.style.display='none';});
+
+      const unitiotback= document.getElementById('unitiotback');
+      unitiotback.addEventListener('click', () => {
+      meeee.style.display='block';
+      unitiot.style.display='none';});
+
+      const unitppback= document.getElementById('unitppback');
+      unitppback.addEventListener('click', () => {
+      meeee.style.display='block';
+      unitpp.style.display='none';});
+
+
+
+
+
+      
+//hiding previous data then going to chat....!
+const u13= document.getElementById('u13');
+      u13.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+      
+
+      const u1= document.getElementById('u1');
+      u1.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      const u2= document.getElementById('u2');
+      u2.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+
+      const u3= document.getElementById('u3');
+      u3.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      
+      const u4= document.getElementById('u4');
+      u4.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      
+      const u5= document.getElementById('u5');
+      u5.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unit.style.display='none';});
+      
+      
+      const u6= document.getElementById('u6');
+      u6.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      const u7= document.getElementById('u7');
+      u7.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      
+      const u8= document.getElementById('u8');
+      u8.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unit.style.display='none';});
+      
+      
+      const u11= document.getElementById('u11');
+      u11.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      
+      const u9= document.getElementById('u9');
+      u9.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      
+      const u10= document.getElementById('u10');
+      u10.addEventListener('click', () => {
+        hide.style.display='block';
+      
+      unit.style.display='none';});
+      
+      const u12= document.getElementById('u12');
+      u12.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+           
+
+       
+      const u14= document.getElementById('u14');
+      u14.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u15= document.getElementById('u15');
+      u15.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u16= document.getElementById('u16');
+      u16.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+
+      const u17= document.getElementById('u17');
+      u17.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u18= document.getElementById('u18');
+      u18.addEventListener('click', () => {
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u19= document.getElementById('u19');
+      u19.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u20= document.getElementById('u20');
+      u20.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u21= document.getElementById('u21');
+      u21.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u22= document.getElementById('u22');
+      u22.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u23= document.getElementById('u23');
+      u23.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u24= document.getElementById('u24');
+      u24.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u25= document.getElementById('u25');
+      u25.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u26= document.getElementById('u26');
+      u26.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u27= document.getElementById('u27');
+      u27.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u28= document.getElementById('u28');
+      u28.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u29= document.getElementById('u29');
+      u29.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+     
+            
+      const u30= document.getElementById('u30');
+      u30.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u31= document.getElementById('u31');
+      u31.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+            
+      const u32= document.getElementById('u32');
+      u32.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm1.style.display='none';});
+             
+      const u33= document.getElementById('u33');
+      u33.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u34= document.getElementById('u34');
+      u34.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u35= document.getElementById('u35');
+      u35.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u36= document.getElementById('u36');
+      u36.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u37= document.getElementById('u37');
+      u37.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u38= document.getElementById('u38');
+      u38.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u39= document.getElementById('u39');
+      u39.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u40= document.getElementById('u40');
+      u40.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+    
+      const u41= document.getElementById('u41');
+      u41.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u42= document.getElementById('u42');
+      u42.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+
+      const u43= document.getElementById('u43');
+      u43.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitphy.style.display='none';});
+             
+      const u44= document.getElementById('u44');
+      u44.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u45= document.getElementById('u45');
+      u45.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u46= document.getElementById('u46');
+      u46.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u47= document.getElementById('u47');
+      u47.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u48= document.getElementById('u48');
+      u48.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u49= document.getElementById('u49');
+      u49.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u50= document.getElementById('u50');
+      u50.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u51= document.getElementById('u51');
+      u51.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+            
+      const u52= document.getElementById('u52');
+      u52.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      
+      const u53= document.getElementById('u53');
+      u53.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u54= document.getElementById('u54');
+      u54.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitchem.style.display='none';});
+             
+      const u55= document.getElementById('u55');
+      u55.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitbce.style.display='none';});
+             
+      const u56= document.getElementById('u56');
+      u56.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitbce.style.display='none';});
+             
+      const u57= document.getElementById('u57');
+      u57.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitbce.style.display='none';});
+             
+      const u58= document.getElementById('u58');
+      u58.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitbce.style.display='none';});
+             
+      const u59= document.getElementById('u59');
+      u59.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitbce.style.display='none';});
+            
+      const u60= document.getElementById('u60');
+      u60.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitc.style.display='none';});
+            
+       const u61= document.getElementById('u61');
+      u61.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitc.style.display='none';});
+            
+       const u62= document.getElementById('u62');
+      u62.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitc.style.display='none';});
+            
+       const u63= document.getElementById('u63');
+      u63.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitc.style.display='none';});
+            
+       const u64= document.getElementById('u64');
+      u64.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitc.style.display='none';});
+            
+      const u65= document.getElementById('u65');
+      u65.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm2.style.display='none';});
+            
+      const u66= document.getElementById('u66');
+      u66.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm2.style.display='none';});
+            
+      const u67= document.getElementById('u67');
+      u67.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm2.style.display='none';});
+            
+      const u68= document.getElementById('u68');
+      u68.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitde.style.display='none';});
+            
+      const u69= document.getElementById('u69');
+      u69.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitde.style.display='none';});
+            
+      const u70= document.getElementById('u70');
+      u70.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitde.style.display='none';});
+            
+      const u71= document.getElementById('u71');
+      u71.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitde.style.display='none';});
+            
+      const u72= document.getElementById('u72');
+      u72.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitde.style.display='none';});
+         
+      const u73= document.getElementById('u73');
+      u73.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitos.style.display='none';});
+            
+      const u74= document.getElementById('u74');
+      u74.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitos.style.display='none';});
+            
+      const u75= document.getElementById('u75');
+      u75.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitos.style.display='none';});
+            
+      const u76= document.getElementById('u76');
+      u76.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitos.style.display='none';});
+            
+      const u77= document.getElementById('u77');
+      u77.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitos.style.display='none';});
+            
+      const u78= document.getElementById('u78');
+      u78.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitds.style.display='none';});
+            
+      const u79= document.getElementById('u79');
+      u79.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitds.style.display='none';});
+            
+      const u80= document.getElementById('u80');
+      u80.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitds.style.display='none';});
+            
+      const u81= document.getElementById('u81');
+      u81.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitds.style.display='none';});
+            
+      const u82= document.getElementById('u82');
+      u82.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitds.style.display='none';});
+
+      const u83= document.getElementById('u83');
+      u83.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitdbms.style.display='none';});
+            
+            
+      const u84= document.getElementById('u84');
+      u84.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitdbms.style.display='none';});
+            
+      const u85= document.getElementById('u85');
+      u85.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitdbms.style.display='none';});
+            
+      const u86= document.getElementById('u86');
+      u86.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitdbms.style.display='none';});
+            
+      const u87= document.getElementById('u87');
+      u87.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitdbms.style.display='none';});
+            
+      const u88= document.getElementById('u88');
+      u88.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm3.style.display='none';});
+            
+      const u89= document.getElementById('u89');
+      u89.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm3.style.display='none';});
+          
+      const u90= document.getElementById('u90');
+      u90.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitm3.style.display='none';});
+            
+      const u91= document.getElementById('u91');
+      u91.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitwt.style.display='none';});
+
+      const u92= document.getElementById('u92');
+      u92.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitwt.style.display='none';});
+
+      const u93= document.getElementById('u93');
+      u93.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitwt.style.display='none';});
+
+      const u94= document.getElementById('u94');
+      u94.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitwt.style.display='none';});
+
+      const u95= document.getElementById('u95');
+      u95.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitwt.style.display='none';});
+
+     
+      const u96= document.getElementById('u96');
+      u96.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcomp.style.display='none';});
+
+           
+      const u97= document.getElementById('u97');
+      u97.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcomp.style.display='none';});
+
+      const u98= document.getElementById('u98');
+      u98.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcomp.style.display='none';});
+
+      const u99= document.getElementById('u99');
+      u99.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcomp.style.display='none';});
+
+      const u100= document.getElementById('u100');
+      u100.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcomp.style.display='none';});
+
+      const u101= document.getElementById('u101');
+      u101.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitok.style.display='none';});
+
+      const u102= document.getElementById('u102');
+      u102.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitok.style.display='none';});
+
+      const u103= document.getElementById('u103');
+      u103.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitok.style.display='none';});
+
+      const u104= document.getElementById('u104');
+      u104.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitok.style.display='none';});
+
+      const u105= document.getElementById('u105');
+      u105.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitok.style.display='none';});
+
+      const u106= document.getElementById('u106');
+      u106.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcn.style.display='none';});
+
+      const u107= document.getElementById('u107');
+      u107.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcn.style.display='none';});
+
+      const u108= document.getElementById('u108');
+      u108.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcn.style.display='none';});
+
+      const u109= document.getElementById('u109');
+      u109.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcn.style.display='none';});
+
+      const u110= document.getElementById('u110');
+      u110.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitcn.style.display='none';});
+
+
+      const u111= document.getElementById('u111');
+      u111.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitime.style.display='none';});
+
+
+      const u112= document.getElementById('u112');
+      u112.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitime.style.display='none';});
+
+
+      const u113= document.getElementById('u113');
+      u113.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitime.style.display='none';});
+
+
+      const u114= document.getElementById('u114');
+      u114.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitime.style.display='none';});
+
+
+      const u115= document.getElementById('u115');
+      u111.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitime.style.display='none';});
+
+      const u116= document.getElementById('u116');
+      u116.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitjp.style.display='none';});
+
+
+      const u117= document.getElementById('u117');
+      u116.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitjp.style.display='none';});
+
+
+      const u118= document.getElementById('u118');
+      u118.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitjp.style.display='none';});
+
+
+      const u119= document.getElementById('u119');
+      u119.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitjp.style.display='none';});
+
+
+      const u120= document.getElementById('u120');
+      u120.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitjp.style.display='none';});
+
+      const u121= document.getElementById('u121');
+      u121.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitse.style.display='none';});
+
+
+      const u122= document.getElementById('u122');
+      u122.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitse.style.display='none';});
+
+
+      const u123= document.getElementById('u123');
+      u123.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitse.style.display='none';});
+
+
+      const u124= document.getElementById('u124');
+      u124.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitse.style.display='none';});
+
+
+      const u125= document.getElementById('u125');
+      u125.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitse.style.display='none';});
+
+      const u126= document.getElementById('u126');
+      u126.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitiot.style.display='none';});
+
+
+      const u127= document.getElementById('u127');
+      u127.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitiot.style.display='none';});
+
+
+      const u128= document.getElementById('u128');
+      u128.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitiot.style.display='none';});
+
+
+      const u129= document.getElementById('u129');
+      u129.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitiot.style.display='none';});
+
+
+      const u130= document.getElementById('u130');
+      u130.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitiot.style.display='none';});
+
+
+      const u131= document.getElementById('u131');
+      u131.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitpp.style.display='none';});
+
+
+      const u132= document.getElementById('u132');
+      u132.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitpp.style.display='none';});
+
+
+      const u133= document.getElementById('u133');
+      u133.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitpp.style.display='none';});
+
+
+      const u134= document.getElementById('u134');
+      u134.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitpp.style.display='none';});
+
+
+      const u135= document.getElementById('u135');
+      u135.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      unitpp.style.display='none';});
+
+
+      const back1stsemai= document.getElementById('back1stsemai');
+    back1stsemai.addEventListener('click', () => {
+      hii.style.display='block';
+      
+      you.style.display='none';});
+
+      const back3rdsemai= document.getElementById('back3rdsemai');
+    back3rdsemai.addEventListener('click', () => {
+      hii.style.display='block';
+      
+      youu.style.display='none';});
+
+      const back4rthsemai= document.getElementById('back4rthsemai');
+    back4rthsemai.addEventListener('click', () => {
+      hii.style.display='block';
+      
+      youuu.style.display='none';});
+
+      const back5thsemai= document.getElementById('back5thsemai');
+    back5thsemai.addEventListener('click', () => {
+      hii.style.display='block';
+      
+      youuuu.style.display='none';});
+
+
+      const aiengback= document.getElementById('aiengback');
+    aiengback.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiuniteng.style.display='none';});
+
+
+
+      const aim1back= document.getElementById('aim1back');
+    aim1back.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiunitm1.style.display='none';});
+
+
+      const aiphyback= document.getElementById('aiphyback');
+    aiphyback.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiunitphy.style.display='none';});
+
+
+      const aichemback= document.getElementById('aichemback');
+    aichemback.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiunitchem.style.display='none';});
+
+      const aibaimback= document.getElementById('aibaimback');
+    aibaimback.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiunitbaim.style.display='none';});
+
+      const aicback= document.getElementById('aicback');
+    aicback.addEventListener('click', () => {
+      you.style.display='block';
+      
+      aiunitc.style.display='none';});
+      //pastedcodefromsailendra
+      const aim2back= document.getElementById('aim2back');
+    aim2back.addEventListener('click', () => {
+      youu.style.display='block';
+      
+      aiunitm2.style.display='none';});
+
+      const aipyback= document.getElementById('aipyback');
+    aipyback.addEventListener('click', () => {
+      youu.style.display='block';
+      aiunitpy.style.display='none';});
+
+      const aiosback= document.getElementById('aiosback');
+    aiosback.addEventListener('click', () => {
+      youu.style.display='block';
+      
+      aiunitos.style.display='none';});
+
+      const aidecoback= document.getElementById('aidecoback');
+    aidecoback.addEventListener('click', () => {
+      youu.style.display='block';
+      
+      aiunitdeco.style.display='none';});
+
+      const aidbmsback= document.getElementById('aidbmsback');
+    aidbmsback.addEventListener('click', () => {
+      youu.style.display='block';
+      
+      aiunitdbms.style.display='none';});
+      //tohere
+
+
+      const aim3back= document.getElementById('aim3back');
+    aim3back.addEventListener('click', () => {
+      youuu.style.display='block';
+      
+      aiunitm3.style.display='none';});
+
+      const aiwtback= document.getElementById('aiwtback');
+    aiwtback.addEventListener('click', () => {
+      youuu.style.display='block';
+      
+      aiunitwt.style.display='none';});
+
+      const aiaiback= document.getElementById('aiaiback');
+    aiaiback.addEventListener('click', () => {
+      youuu.style.display='block';
+      
+      aiunitai.style.display='none';});
+
+      const aijpback= document.getElementById('aijpback');
+    aijpback.addEventListener('click', () => {
+      youuu.style.display='block';
+      
+      aiunitjp.style.display='none';});
+
+      const aifmlback= document.getElementById('aifmlback');
+    aifmlback.addEventListener('click', () => {
+      youuu.style.display='block';
+      
+      aiunitfml.style.display='none';});
+
+      const aiimeback= document.getElementById('aiimeback');
+    aiimeback.addEventListener('click', () => {
+      youuuu.style.display='block';
+      
+      aiunitime.style.display='none';});
+
+      const ainlpback= document.getElementById('ainlpback');
+    ainlpback.addEventListener('click', () => {
+      youuuu.style.display='block';
+      
+      aiunitnlp.style.display='none';});
+
+      const aiseback= document.getElementById('aiseback');
+    aiseback.addEventListener('click', () => {
+      youuuu.style.display='block';
+      
+      aiunitse.style.display='none';});
+
+      const aiiotback= document.getElementById('aiiotback');
+    aiiotback.addEventListener('click', () => {
+      youuuu.style.display='block';
+      
+      aiunitiot.style.display='none';});
+
+      const aiuffback= document.getElementById('aiuffback');
+    aiuffback.addEventListener('click', () => {
+      youuuu.style.display='block';
+      
+      uff.style.display='none';});
+//you want to do from here  30/08/2023
+                       
+      const u136= document.getElementById('u136');
+      u136.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+
+      const u137= document.getElementById('u137');
+      u137.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u138= document.getElementById('u138');
+      u138.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u139= document.getElementById('u139');
+      u139.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u140= document.getElementById('u140');
+      u140.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u141= document.getElementById('u141');
+      u141.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+
+      const u142= document.getElementById('u142');
+      u142.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u143= document.getElementById('u143');
+      u143.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+
+      const u144= document.getElementById('u144');
+      u144.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u145= document.getElementById('u145');
+      u145.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u146= document.getElementById('u146');
+      u146.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiuniteng.style.display='none';});
+
+      const u147= document.getElementById('u147');
+      u147.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u148= document.getElementById('u148');
+      u148.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u149= document.getElementById('u149');
+      u149.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u150= document.getElementById('u150');
+      u150.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u151= document.getElementById('u151');
+      u151.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u152= document.getElementById('u152');
+      u152.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u153= document.getElementById('u153');
+      u153.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u154= document.getElementById('u154');
+      u154.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u155= document.getElementById('u155');
+      u155.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u156= document.getElementById('u156');
+      u156.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u157= document.getElementById('u157');
+      u157.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u158= document.getElementById('u158');
+      u158.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u159= document.getElementById('u159');
+      u159.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u160= document.getElementById('u160');
+      u160.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u161= document.getElementById('u161');
+      u161.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u162= document.getElementById('u162');
+      u162.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u163= document.getElementById('u163');
+      u163.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u164= document.getElementById('u164');
+      u164.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+
+      const u165= document.getElementById('u165');
+      u165.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+      const u166= document.getElementById('u166');
+      u166.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+
+      const u167= document.getElementById('u167');
+      u167.addEventListener('click', () => {
+     
+        hide.style.display='block';
+      aiunitm1.style.display='none';});
+
+     
+
+
+           
+           
+           
+           
+            
+    // Connect to Chat Server button functionality
+    connectButton.addEventListener('click', () => {
+      connectButton.style.display = 'none';
+      socket = io();
+      messageForm.style.display = 'block';
+
+
+
+     
+
+
+   
+      // Handle incoming messages
+      socket.on('chat message', (msg) => {
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML += `<h3>${msg}</h3>`;
+      });
+      socket.on('chat history', (history) => {
+  const messages = document.getElementById('messages');
+  messages.innerHTML = ''; // Clear existing messages
+
+  for (const message of history) {
+    const li = document.createElement('li');
+    li.textContent = message.text;
+    messages.appendChild(li);
+  }
+});
+
+
+
+
+       
+      const form = document.getElementById('message-form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const input = document.getElementById('message-input');
+        const message = input.value;
+        socket.emit('chat message',message);
+        input.value = '';
+      });  
+     
+
+
+
+
+
+      
+  // Join room on connect
+  socket.emit('join room', room);
+});
+
+// Handle form submission
+
+
+
+
+    
+  </script>
+
+</body>
+</html>
